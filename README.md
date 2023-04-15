@@ -1,5 +1,6 @@
 # UnderWater Few\-shot
-This code is for the paper "Few-Shot Segmentation for Underwater Imagery" (accepted to .....) [[arxiv]()]
+This code is for the paper "Few-shot segmentation and Semantic Segmentation for Underwater
+Imagery" (accepted to .....) [[arxiv]()]
 
 Our proposed network architecture for few-shot segmentation
 <p align="left">
