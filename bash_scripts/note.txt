@@ -1,0 +1,418 @@
+experiments initiated on june 19 2022
+********************************************************************************************************************
+#####################################asgnet 1 shot####################################
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_asgnet_1_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_asgnet.sh 1 0
+
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_asgnet_1_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_asgnet.sh 1 1
+
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_asgnet_1_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_asgnet.sh 1 2
+
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_asgnet_1_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_asgnet.sh 1 3
+
+#####################################asgnet 5 shot####################################
+tynamo gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_asgnet_5_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_asgnet.sh 5 0
+
+tynamo gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_asgnet_5_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_asgnet.sh 5 1
+
+tynamo gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_asgnet_5_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_asgnet.sh  5 2
+
+tynamo gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_asgnet_5_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_asgnet.sh 5 3
+
+#####################################eca_net_sup_que 1 shot####################################
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_1_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que.sh 1 0
+
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_1_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que.sh 1 1
+
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_1_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que.sh 1 2
+
+tynamo gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_1_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que.sh 1 3
+
+#####################################eca_net_sup_que 5 shot####################################
+
+apmheros gpu:2 means gpu 1
+apmheros gpu:3 means gpu 2
+
+ampheros gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_5_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que.sh 5 0
+
+ampheros gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_5_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que.sh 5 1
+
+ampheros gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_5_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que.sh 5 2
+
+ampheros gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_5_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que.sh 5 3
+
+
+#####################################eca_net_sup_que_vgg16 1 shot####################################
+ampheros gpu 4:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_vgg16_1_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que_vgg16.sh 1 0
+
+ampheros gpu 4:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_vgg16_1_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que_vgg16.sh 1 1
+
+ampheros gpu 4:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_vgg16_1_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que_vgg16.sh 1 2
+
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_vgg16_1_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que_vgg16.sh 1 3
+
+********************************************************************************************************************
+
+experiments initiated on june 19 2022
+********************************************************************************************************************
+
+#####################################eca_net_sup_que_vgg16 5 shot####################################
+tynamo gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_vgg16_5_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que_vgg16.sh 5 0
+
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_vgg16_5_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que_vgg16.sh 5 1
+
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_vgg16_5_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que_vgg16.sh 5 2
+
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_eca_net_sup_que_vgg16_5_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_eca_net_sup_que_vgg16.sh 5 3
+
+#####################################train_with_fpmms 1 shot####################################
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_fpmms_1_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_fpmms.sh 1 0
+
+tynamo gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_fpmms_1_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_fpmms.sh 1 1
+
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_fpmms_1_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_fpmms.sh 1 2
+
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_fpmms_1_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_fpmms.sh 1 3
+
+#####################################train_with_fpmms 5 shot####################################
+ampharos gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_fpmms_5_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_fpmms.sh 5 0
+
+ampharos gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_fpmms_5_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_fpmms.sh 5 1
+
+ampharos gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_fpmms_5_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_fpmms.sh 5 2
+
+ampharos gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_fpmms_5_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_fpmms.sh 5 3
+
+#####################################train_with_pa_net_only 1 shot####################################
+ampharos gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pa_net_only_1_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pa_net_only.sh 1 0
+
+ampharos gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pa_net_only_1_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pa_net_only.sh 1 1
+
+electrode gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pa_net_only_1_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pa_net_only.sh 1 2
+
+
+#####################################train_with_pa_net_only 5 shot####################################
+ampharos gpu 4:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pa_net_only_5_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pa_net_only.sh 5 0
+
+ampharos gpu 4:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pa_net_only_5_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pa_net_only.sh 5 1
+
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pa_net_only_5_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pa_net_only.sh 5 2
+
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pa_net_only_5_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pa_net_only.sh 5 3
+
+************************************************************************************************************************
+
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pa_net_only_1_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pa_net_only.sh 1 3
+
+#####################################train_with_pfenet 1 shot####################################
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pfenet_1_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pfenet.sh 1 0
+
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pfenet_1_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pfenet.sh 1 1
+
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pfenet_1_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pfenet.sh 1 2
+
+tynamo gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pfenet_1_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pfenet.sh 1 3
+
+#####################################train_with_pfenet 5 shot####################################
+tynamo gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pfenet_5_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pfenet.sh 5 0
+
+tynamo gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pfenet_5_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pfenet.sh 5 1
+
+tynamo gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pfenet_5_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pfenet.sh 5 2
+
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_pfenet_5_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_pfenet.sh 5 3
+
+#####################################train_with_triplet_sup_que_vgg16 1 shot####################################
+ampharos gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_1_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 1 0
+
+ampharos gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_1_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 1 1
+
+ampharos gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_1_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 1 2
+
+ampharos gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_1_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 1 3
+
+#####################################train_with_triplet_sup_que_vgg16 5 shot####################################
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_5_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 5 0
+
+tynamo gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_5_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 5 1
+
+tynamo gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_5_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 5 2
+
+tynamo gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_5_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 5 3
+
+#####################################train_with_triplet_sup_que_vgg16_dice 1 shot####################################
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_1_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 1 0
+
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_1_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 1 1
+
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_1_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 1 2
+
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_1_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 1 3
+
+#####################################train_with_triplet_sup_que_vgg16_dice 5 shot####################################
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_5_0
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 5 0
+
+electrike gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_5_1
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 5 1
+
+electrike gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_5_2
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 5 2
+
+electrike gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_5_3
+source ../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 5 3
+
+
+# https://chi2023.acm.org/2022/04/14/chi23-updated-revise-and-resubmit-paper-process/
+# https://www.icra2023.org/programme

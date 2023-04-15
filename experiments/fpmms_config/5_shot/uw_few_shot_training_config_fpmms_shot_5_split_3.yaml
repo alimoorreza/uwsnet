@@ -1,0 +1,47 @@
+GPU: 0
+LOG_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/log/'
+DATA_DIR: ''
+OUTPUT_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/output/'
+WORKERS: 2
+BASE_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
+CLASSES: 2
+
+MODEL:
+  NAME: FPMMs
+CUDNN:
+  BENCHMARK: true
+  DETERMINISTIC: false
+  ENABLED: true
+DATASET:
+  ROOT: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
+  IMAGE_W: 417
+  IMAGE_H: 417
+TEST:
+  BATCH_SIZE_PER_GPU: 1
+TRAIN:
+  ARCH: FPMMs
+  TRAIN_H: 417
+  TRAIN_W: 417
+  BATCH_SIZE: 1
+  BATCH_SIZE_VAL: 1
+  END_EPOCH: 40
+  BEGIN_EPOCH: 0
+  PRINT_FREQ: 100
+  SAVE_FREQ: 1
+  BASE_LR: 3.5e-4
+  MOMENTUM: 0.9
+  POWER: 0.9
+  WEIGHT_DECAY: 0.0005
+  GAMMA: 0.1
+  SAVE_PATH: default
+  RESUME:  True
+  EVALUATE: True
+  TEST_LABEL_SPLIT_VALUE: 3
+  N_WAYS: 1
+  N_SHOTS: 5
+  EPISODE: 1000
+  LR_MILESTONE: [10000, 20000, 30000, 40000]
+  SCALE_VAL: 1
+  PRETRAINED_MODEL: ''
+  RANDOM_SPLIT: False
+

@@ -1,0 +1,53 @@
+GPU: 0
+LOG_DIR: './log/'
+DATA_DIR: ''
+OUTPUT_DIR: './output/'
+WORKERS: 2
+BASE_DIR: '/kaggle/input/under-water-few-shot'
+CLASSES: 2
+
+MODEL:
+  NAME: PAnet
+CUDNN:
+  BENCHMARK: true
+  DETERMINISTIC: false
+  ENABLED: true
+DATASET:
+  ROOT: '/kaggle/input/under-water-few-shot'
+  IMAGE_W: 473
+  IMAGE_H: 473
+TEST:
+  BATCH_SIZE_PER_GPU: 1
+TRAIN:
+  ARCH: PAnet
+  TRAIN_H: 473
+  TRAIN_W: 473
+  BATCH_SIZE: 1
+  BATCH_SIZE_VAL: 1
+  END_EPOCH: 40
+  BEGIN_EPOCH: 0
+  PRINT_FREQ: 100
+  SAVE_FREQ: 1
+  BASE_LR: 0.001
+  MOMENTUM: 0.9
+  POWER: 0.9
+  WEIGHT_DECAY: 0.0005
+  GAMMA: 0.1
+  SAVE_PATH: default
+  RESUME:  True
+  EVALUATE: True
+  TEST_LABEL_SPLIT_VALUE: 0
+  N_WAYS: 1
+  N_SHOTS: 5
+  EPISODE: 1000
+  LR_MILESTONE: [10000, 20000, 30000, 40000]
+  VGG_MODEL_PATH: '/kaggle/input/resnet-pretrained/vgg16-397923af.pth'
+  SCALE_VAL: 1
+  PRETRAINED_MODEL: ''
+  PA_NET_TYPE: 'triplet_sup_que_dice'
+  RANDOM_SPLIT: False
+
+# PA_NET_TYPE: 'eca_net_sup_que'
+# PA_NET_TYPE: 'eca_net_sup_que_vgg16'
+# PA_NET_TYPE: 'triplet_sup_que_vgg16'
+# PA_NET_TYPE: 'triplet_sup_que_vgg16_dice'
