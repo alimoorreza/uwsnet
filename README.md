@@ -3,7 +3,7 @@ This code is for the paper "Few-Shot Segmentation for Underwater Imagery" (accep
 
 Our proposed network architecture for few-shot segmentation
 <p align="left">
-  <img src="figures/architecture.png" width="1229" height="450">
+  <img src="figures/architecture.png" width="100%" height="auto">
 </p>
 
 ---
