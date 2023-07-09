@@ -202,6 +202,7 @@ Now for training run,
 cd Mask2Former-mod
 python train_net.py --num-gpus 1 --config-file ../configs/uws/semantic-segmentation/maskformer2_R50_bs16_300k.yaml
 ```
+In the Mask2Former-mod/mask2former/data/datasets/register_uws.py file change line no 78 and 56 with the path to the semantic segmentation dataset. 
 
 ---
 
