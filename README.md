@@ -164,6 +164,45 @@ Under water semantic segmentation dataset is available [here](https://drive.goog
 | 29 | reef        | 27       | (0,   0,   110) |
 | 30 | others      | 28       | (47,  220, 70)  |
 
+### Train
+
+#### HRNet V2
+To train HRNet V2 model on our proposed dataset run the following commands.
+```shell
+cd tools
+python3 python3 train_hrnet_v2_final.py --cfg ../experiments/hrnet/uws_training_hrnet_v2.yaml
+```
+
+Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `MODEL`) in the config file according to your file structure.
+
+#### Mask2Former
+To train Mask2Former model the following packages needs to be installed
+```shell
+pip install cython
+pip install scipy
+pip install shapely
+pip install timm
+pip install h5py
+pip install submitit
+pip install scikit-image
+python3 -m pip install 'git+https://github.com/facebookresearch/detectron2.git'
+```
+
+Clone the modified mask2former repository using,
+
+```shell
+git clone https://github.com/Imran2205/Mask2Former-mod
+```
+Then run the following command
+```shell
+cd /kaggle/working/Mask2Former-mod/mask2former/modeling/pixel_decoder/ops && sh make.sh
+```
+Now for training run,
+```shell
+cd Mask2Former-mod
+python train_net.py --num-gpus 1 --config-file ../configs/uws/semantic-segmentation/maskformer2_R50_bs16_300k.yaml
+```
+
 ---
 
 ## Citation
