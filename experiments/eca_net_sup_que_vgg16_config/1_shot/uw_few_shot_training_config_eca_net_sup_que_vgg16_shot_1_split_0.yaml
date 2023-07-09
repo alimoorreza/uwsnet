@@ -13,7 +13,7 @@ CUDNN:
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
-  ROOT: '/kaggle/input/under-water-few-shot/dataset/'
+  ROOT: '/kaggle/input/under-water-few-shot/'
   IMAGE_W: 473
   IMAGE_H: 473
 TEST:
