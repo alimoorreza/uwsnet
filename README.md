@@ -108,8 +108,43 @@ python3 test.py --config path_to_config_file
 Must set the base architecture (`NAME` under `MODEL`) and type (`PA_NET_TYPE` under `TRAIN`) according to your choice in the config file.
   
 ### Pre-trained models
-- Pre-trained backbones and models can be found in [Google Driver]()
+- Pre-trained backbones and models can be found in [Google Driver](https://drive.google.com/drive/folders/11ebSVy2YHBjYyIQlmmnKsVRndXgny4Po?usp=sharing)
 - Download backbones and set the backbone model path 
+
+## Semantic Segmentation
+### Class Map
+| Sl | Class       | Train Id | Color(r, g, b)  |
+|----|-------------|----------|-----------------|
+| 1  | unlabeled   | 255      | (0,   0,   0)   |
+| 2  | crab        | 0        | (128, 64,  128) |
+| 3  | crocodile   | 1        | (244, 35,  232) |
+| 4  | dolphin     | 2        | (70,  70,  70)  |
+| 5  | frog        | 3        | (102, 102, 156) |
+| 6  | nettles     | 4        | (190, 153, 153) |
+| 7  | octopus     | 5        | (153, 153, 153) |
+| 8  | otter       | 6        | (250, 170, 30)  |
+| 9  | penguin     | 7        | (220, 220, 0)   |
+| 10 | polar_bear  | 8        | (107, 142, 35)  |
+| 11 | sea_anemone | 9        | (152, 251, 152) |
+| 12 | sea_urchin  | 10       | (70,  130, 180) |
+| 13 | seahorse    | 11       | (220, 20,  60)  |
+| 14 | seal        | 12       | (253, 0,   0)   |
+| 15 | shark       | 13       | (0,   0,   142) |
+| 16 | shrimp      | 14       | (0,   0,   70)  |
+| 17 | star_fish   | 15       | (0,   60,  100) |
+| 18 | stingray    | 16       | (0,   80,  100) |
+| 19 | squid       | 17       | (0,   0,   230) |
+| 20 | turtle      | 18       | (119, 11,  32)  |
+| 21 | whale       | 19       | (111, 74,  0)   |
+| 22 | nudibranch  | 20       | (81,  0,   81)  |
+| 23 | coral       | 21       | (250, 170, 160) |
+| 24 | rock        | 22       | (230, 150, 140) |
+| 25 | water       | 23       | (180, 165, 180) |
+| 26 | sand        | 24       | (150, 100, 100) |
+| 27 | plant       | 25       | (150, 120, 90)  |
+| 28 | human       | 26       | (153, 153, 153) |
+| 29 | reef        | 27       | (0,   0,   110) |
+| 30 | others      | 28       | (47,  220, 70)  |
 
 ---
 
