@@ -4,6 +4,7 @@ DATA_DIR: ''
 OUTPUT_DIR: '/kaggle/working/output/'
 WORKERS: 2
 BASE_DIR: '/kaggle/working/underwater_few_shot/'
+CLASSES: 2
 
 MODEL:
   NAME: PAnet
