@@ -35,9 +35,9 @@ Training and testing on our proposed network and other baseline networks can be 
 ### Preparation
 First, download the code and install dependencies. Then download the dataset and put it in the dataset directory.
 
-You can download dataset from [here]()
+You can download dataset from [here](https://drive.google.com/file/d/14Qi3Zgb5ZL0oIsuZHDw5JmQxjOVGPtU4/view?usp=drive_link)
 
-Also download the dataset split files from [here]() and put them in dataset_split directory
+Also download the dataset split files from [here](https://drive.google.com/drive/folders/1IOLhsgBd2ZnVr4I10s8m4PqfP2yzpEbp?usp=drive_link) and put them in dataset_split directory
 
 
 ### Prepare Config Files
@@ -80,6 +80,11 @@ Please change `LOG_DIR`, `OUTPUT_DIR`, `BASE_DIR`, and dataset `ROOT` according 
 cd tools
 python3 train.py --config path_to_config_file
 ```
+#### Example 
+```
+cd tools
+python3 train.py --config ../experiments/eca_net_sup_que_vgg16_config/1_shot/uw_few_shot_training_config_eca_net_sup_que_vgg16_shot_1_split_0.yaml
+```
 
 #### 1. Train  UWSNet models:
 
@@ -104,14 +109,27 @@ If you want to test for a specific saved models, you can use:
 cd tools
 python3 test.py --config path_to_config_file
 ```
+#### Example (UWSNet V2)
+```
+cd tools
+python3 test.py --config ../experiments/eca_net_sup_que_vgg16_config/1_shot/uw_few_shot_training_config_eca_net_sup_que_vgg16_shot_1_split_0.yaml
+```
+Set `PRETRAINED_MODEL` with the path of trained UWSNet V2. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link).
+#### Example (UWSNet V6)
+```
+cd tools
+python3 train.py --config ..experiments/triplet_sup_que_vgg16_dice_config/1_shot/uw_few_shot_training_config_triplet_sup_que_vgg16_dice_shot_1_split_0.yaml
+```
+Set `PRETRAINED_MODEL` with the path of trained UWSNet V6. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link).
 
-Must set the base architecture (`NAME` under `MODEL`) and type (`PA_NET_TYPE` under `TRAIN`) according to your choice in the config file.
+Must set the base architecture (`NAME` under `MODEL`) and type (`PA_NET_TYPE` under `TRAIN`) in config file according to your choice.
   
 ### Pre-trained models
-- Pre-trained backbones and models can be found in [Google Driver](https://drive.google.com/drive/folders/11ebSVy2YHBjYyIQlmmnKsVRndXgny4Po?usp=sharing)
-- Download backbones and set the backbone model path 
+- Pre-trained backbones and models can be found in [Google Driver](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link)
+- Download backbones and set the backbone model path. Pretrained backbone can be found [here](https://drive.google.com/drive/folders/15AD86KAKEpySFu8NFNZcPWE_9vmAuGx5?usp=drive_link)
 
 ## Semantic Segmentation
+Under water semantic segmentation dataset is available [here](https://drive.google.com/drive/folders/1ymSM4RRg75AWgd1v6cqnsh-O5-mX_v6T?usp=drive_link)
 ### Class Map
 | Sl | Class       | Train Id | Color(r, g, b)  |
 |----|-------------|----------|-----------------|
