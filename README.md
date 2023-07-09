@@ -197,6 +197,7 @@ Then run the following command
 ```shell
 cd /kaggle/working/Mask2Former-mod/mask2former/modeling/pixel_decoder/ops && sh make.sh
 ```
+In the Mask2Former-mod/mask2former/data/datasets/register_uws.py file change line no 78 and 56 with the path to the semantic segmentation dataset. 
 Now for training run,
 ```shell
 cd Mask2Former-mod
