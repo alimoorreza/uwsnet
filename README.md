@@ -167,6 +167,14 @@ Under water semantic segmentation dataset is available [here](https://drive.goog
 ### Train
 
 #### HRNet V2
+First install the following packages
+```shell
+pip install imagecodecs 
+pip install pickle5
+pip install timm
+pip install tensorboardX
+pip install yacs
+```
 To train HRNet V2 model on our proposed dataset run the following commands.
 ```shell
 cd tools
