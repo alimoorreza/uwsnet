@@ -27,6 +27,11 @@ pandas,
 matplotlib,
 scikit-image
 
+To install dependencies run,
+```shell
+pip install -r requirements.txt
+```
+
 ---
 
 ## Usage
