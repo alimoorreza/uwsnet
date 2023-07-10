@@ -185,6 +185,7 @@ Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `M
 
 To run the training on colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_hrnet_v2_train.ipynb)
 
+
 #### Mask2Former
 To train Mask2Former model the following packages needs to be installed
 ```shell
