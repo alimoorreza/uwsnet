@@ -112,17 +112,19 @@ python3 test.py --config path_to_config_file
 #### Example (UWSNet V2)
 ```
 cd tools
-python3 test.py --config ../experiments/eca_net_sup_que_vgg16_config/1_shot/uw_few_shot_training_config_eca_net_sup_que_vgg16_shot_1_split_0.yaml
+python3 test.py --config ../experiments_inference/eca_net_sup_que_vgg16_config/1_shot/uw_few_shot_training_config_eca_net_sup_que_vgg16_shot_1_split_0.yaml
 ```
 Set `PRETRAINED_MODEL` with the path of trained UWSNet V2. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link).
 #### Example (UWSNet V6)
 ```
 cd tools
-python3 train.py --config ..experiments/triplet_sup_que_vgg16_dice_config/1_shot/uw_few_shot_training_config_triplet_sup_que_vgg16_dice_shot_1_split_0.yaml
+python3 test.py --config ../experiments_inference/triplet_sup_que_vgg16_dice_config/1_shot/uw_few_shot_training_config_triplet_sup_que_vgg16_dice_shot_1_split_0.yaml
 ```
 Set `PRETRAINED_MODEL` with the path of trained UWSNet V6. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link).
 
 Must set the base architecture (`NAME` under `MODEL`) and type (`PA_NET_TYPE` under `TRAIN`) in config file according to your choice.
+
+To run the inference in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/fewshot_inference.ipynb)
   
 ### Pre-trained models
 - Pre-trained backbones and models can be found in [Google Driver](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link)
@@ -183,7 +185,7 @@ python3 python3 train_hrnet_v2_final.py --cfg ../experiments/hrnet/uws_training_
 
 Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `MODEL`) in the config file according to your file structure. Download the imagenet pretrained file from [here](https://drive.google.com/file/d/1B4Xh2rhIGe8oMQtOd2znNsc3oIb32lu8/view?usp=drive_link)
 
-To run the training on colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_hrnet_v2_train.ipynb)
+To run the training in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_hrnet_v2_train.ipynb)
 
 
 #### Mask2Former
@@ -215,6 +217,8 @@ cd Mask2Former-mod
 python train_net.py --num-gpus 1 --config-file ../configs/uws/semantic-segmentation/maskformer2_R50_bs16_300k.yaml
 ```
 Pretrained models are available [here](https://drive.google.com/drive/folders/1OQ8IHdf1wYZGoCVoDl_Y0i3rqPQvRnuu?usp=drive_link).
+
+To run the training in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_mask2former_train.ipynb)
 
 ---
 
