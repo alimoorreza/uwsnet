@@ -183,6 +183,8 @@ python3 python3 train_hrnet_v2_final.py --cfg ../experiments/hrnet/uws_training_
 
 Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `MODEL`) in the config file according to your file structure. Download the imagenet pretrained file from [here](https://drive.google.com/file/d/1B4Xh2rhIGe8oMQtOd2znNsc3oIb32lu8/view?usp=drive_link)
 
+To run the training on colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_hrnet_v2_train.ipynb)
+
 #### Mask2Former
 To train Mask2Former model the following packages needs to be installed
 ```shell
