@@ -101,7 +101,7 @@ python3 train.py --config ../experiments/eca_net_sup_que_vgg16_config/1_shot/uw_
 
 Change the `PA_NET_TYPE` value in config file accordingly.
 
-
+Training can also be run using colab notebook. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1oWDovFoQRcpb-InrNMPBQ93TfXD1dY9r?usp=sharing)
 
 ### Inference
 If you want to test for a specific saved models, you can use:
