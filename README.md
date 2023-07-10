@@ -101,7 +101,7 @@ python3 train.py --config ../experiments/eca_net_sup_que_vgg16_config/1_shot/uw_
 
 Change the `PA_NET_TYPE` value in config file accordingly.
 
-Training can also be run using colab notebook. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1oWDovFoQRcpb-InrNMPBQ93TfXD1dY9r?usp=sharing)
+Training can also be run using colab notebook. [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/few_shot_training.ipynb)
 
 ### Inference
 If you want to test for a specific saved models, you can use:
@@ -129,7 +129,7 @@ Must set the base architecture (`NAME` under `MODEL`) and type (`PA_NET_TYPE` un
 - Download backbones and set the backbone model path. Pretrained backbone can be found [here](https://drive.google.com/drive/folders/15AD86KAKEpySFu8NFNZcPWE_9vmAuGx5?usp=drive_link)
 
 ## Semantic Segmentation
-Under water semantic segmentation dataset is available [here](https://drive.google.com/drive/folders/1ymSM4RRg75AWgd1v6cqnsh-O5-mX_v6T?usp=drive_link)
+Under water semantic segmentation dataset is available [here](https://drive.google.com/file/d/1OUw-wFBKCHZiOuVehkOREVP6MTzxKBz9/view?usp=drive_link)
 ### Class Map
 | Sl | Class       | Train Id | Color(r, g, b)  |
 |----|-------------|----------|-----------------|
@@ -173,7 +173,7 @@ cd tools
 python3 python3 train_hrnet_v2_final.py --cfg ../experiments/hrnet/uws_training_hrnet_v2.yaml
 ```
 
-Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `MODEL`) in the config file according to your file structure.
+Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `MODEL`) in the config file according to your file structure. Download the imagenet pretrained file from [here](https://drive.google.com/file/d/1B4Xh2rhIGe8oMQtOd2znNsc3oIb32lu8/view?usp=drive_link)
 
 #### Mask2Former
 To train Mask2Former model the following packages needs to be installed
