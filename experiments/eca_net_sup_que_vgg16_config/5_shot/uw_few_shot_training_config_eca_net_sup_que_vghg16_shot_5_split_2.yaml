@@ -1,9 +1,9 @@
 GPU: 0
-LOG_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/log/'
+LOG_DIR: '/content/log/'
 DATA_DIR: ''
-OUTPUT_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/output/'
+OUTPUT_DIR: '/content/output/'
 WORKERS: 2
-BASE_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
+BASE_DIR: '/content/uwsnet/'
 CLASSES: 2
 
 MODEL:
@@ -13,7 +13,7 @@ CUDNN:
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
-  ROOT: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
+  ROOT: '/content/'
   IMAGE_W: 473
   IMAGE_H: 473
 TEST:
@@ -41,7 +41,7 @@ TRAIN:
   N_SHOTS: 5
   EPISODE: 1000
   LR_MILESTONE: [10000, 20000, 30000, 40000]
-  VGG_MODEL_PATH: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/pretrained_backbone/vgg16-397923af.pth'
+  VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
   SCALE_VAL: 1
   PRETRAINED_MODEL: ''
   PA_NET_TYPE: 'eca_net_sup_que_vgg16'
