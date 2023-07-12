@@ -54,19 +54,19 @@ def get_model():
         elif config.TRAIN.PA_NET_TYPE == 'eca_net_sup_que_vgg16':
             from networks.few_shot_with_ecanet import FewShotSeg
             model = FewShotSeg(pretrained_path=vgg16_model_weight, cfg={'align': True}, vgg_type='ecanet')
-        elif config.TRAIN.PA_NET_TYPE == 'triplet_sup_que_vgg16':
-            from networks.few_shot_with_triplet import FewShotSeg
-            model = FewShotSeg(pretrained_path=vgg16_model_weight, cfg={'align': True}, vgg_type='triplet')
         elif config.TRAIN.PA_NET_TYPE == 'triplet_sup_que':
             from networks.few_shot_with_triplet import FewShotSeg
             model = FewShotSeg(pretrained_path=vgg16_model_weight, cfg={'align': True}, vgg_type='vgg')
-        elif config.TRAIN.PA_NET_TYPE == 'triplet_sup_que_vgg16_dice':
-            from networks.few_shot_with_triplet_diceloss import FewShotSeg
-            model = FewShotSeg(pretrained_path=vgg16_model_weight, cfg={'align': True}, vgg_type='triplet',
-                               gpu=config.GPU)
         elif config.TRAIN.PA_NET_TYPE == 'triplet_sup_que_dice':
             from networks.few_shot_with_triplet_diceloss import FewShotSeg
             model = FewShotSeg(pretrained_path=vgg16_model_weight, cfg={'align': True}, vgg_type='vgg',
+                               gpu=config.GPU)
+        elif config.TRAIN.PA_NET_TYPE == 'triplet_sup_que_vgg16':
+            from networks.few_shot_with_triplet import FewShotSeg
+            model = FewShotSeg(pretrained_path=vgg16_model_weight, cfg={'align': True}, vgg_type='triplet')
+        elif config.TRAIN.PA_NET_TYPE == 'triplet_sup_que_vgg16_dice':
+            from networks.few_shot_with_triplet_diceloss import FewShotSeg
+            model = FewShotSeg(pretrained_path=vgg16_model_weight, cfg={'align': True}, vgg_type='triplet',
                                gpu=config.GPU)
         else:
             raise Exception("Invalid Network Type...")
