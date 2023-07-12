@@ -17,8 +17,8 @@ The experiments are divided into 4 independent groups for cross validation.
 ---
 
 ## Dependencies
-python == 3.8,
-pytorch == 1.6,
+python >= 3.8,
+pytorch >= 1.6,
 
 torchvision,
 pillow,
