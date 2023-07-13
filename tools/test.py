@@ -313,26 +313,26 @@ def main_worker(args):
                                        shuffle=True)
 
     print("TEST_LABEL_SPLIT_VALUE : ", config.TRAIN.TEST_LABEL_SPLIT_VALUE)
-    print("TRAINING START.....")
+    # print("TRAINING START.....")
     print("N SHOTS", config.TRAIN.N_SHOTS)
 
-    logger.info(
-        'Epoch [{}/{}] |'
-        ' current lr: {:.8f} |'.format(
-            last_epoch,
-            config.TRAIN.END_EPOCH,
-            get_lr(optimizer)
-        )
-    )
-
-    print(
-        'Epoch [{}/{}] |'
-        ' current lr: {:.8f} |'.format(
-            last_epoch,
-            config.TRAIN.END_EPOCH,
-            get_lr(optimizer)
-        )
-    )
+    # logger.info(
+    #     'Epoch [{}/{}] |'
+    #     ' current lr: {:.8f} |'.format(
+    #         last_epoch,
+    #         config.TRAIN.END_EPOCH,
+    #         get_lr(optimizer)
+    #     )
+    # )
+    #
+    # print(
+    #     'Epoch [{}/{}] |'
+    #     ' current lr: {:.8f} |'.format(
+    #         last_epoch,
+    #         config.TRAIN.END_EPOCH,
+    #         get_lr(optimizer)
+    #     )
+    # )
 
     iou, bin_iou, val_loss = test(model, validation_dataloader,
                                   class2labels, labels_split,
