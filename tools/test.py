@@ -17,7 +17,6 @@ from utils.normalization_utils import get_imagenet_mean_std
 from networks import FRPMMs, FPMMs, FPMMs_vgg
 from utils import my_optim
 import random
-from utils.new_net_utils import poly_learning_rate as poly_lr_new_net
 
 
 def get_writer():
@@ -35,7 +34,7 @@ def get_model():
         scheduler = None
         print("FRMMs model will be used ......")
         return model, optimizer, criterion, scheduler
-    elif config.TRAIN.ARCH == 'PAnet':
+    elif config.TRAIN.ARCH == 'PAnet' or config.TRAIN.ARCH == 'PAnet_new':
         """
             UWSNet v1 -> eca_net_sup_que
             UWSNet v2 -> eca_net_sup_que_vgg16
@@ -244,7 +243,8 @@ def main_worker(args):
     if config.TRAIN.ARCH == "FPMMs" or \
             config.TRAIN.ARCH == "FPMMs_vgg" or \
             config.TRAIN.ARCH == "FRPMMs" or \
-            config.TRAIN.ARCH == "PAnet":
+            config.TRAIN.ARCH == "PAnet" or \
+            config.TRAIN.ARCH == "PAnet_new":
         train_dataset = IUDataset(
             directory,
             class2labels,
@@ -451,7 +451,7 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                     metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
                                   np.array(query_label[0].cpu()),
                                   labels=label_ids, n_run=run)
-                elif config.TRAIN.ARCH == 'PAnet':
+                elif config.TRAIN.ARCH == 'PAnet' or config.TRAIN.ARCH == 'PAnet_new':
                     support_images = [[shot.cuda(config.GPU) for shot in way] for way in support_images]
                     support_fg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_fg_mask]
                     support_bg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_bg_mask]

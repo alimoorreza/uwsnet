@@ -255,7 +255,8 @@ def main_worker(args):
     if config.TRAIN.ARCH == "FPMMs" or \
             config.TRAIN.ARCH == "FPMMs_vgg" or \
             config.TRAIN.ARCH == "FRPMMs" or \
-            config.TRAIN.ARCH == "PAnet":
+            config.TRAIN.ARCH == "PAnet" or \
+            config.TRAIN.ARCH == "PAnet_new":
         train_dataset = IUDataset(
             directory,
             class2labels,
