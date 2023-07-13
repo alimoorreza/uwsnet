@@ -674,11 +674,11 @@ def train(model, iterator, optimizer, scheduler, criterion, epoch):
 
 def validation(model, iterator, class2labels, labels_split, test_label_split_value, criterion):
     model.eval()
-    metric = Metric(max_label=21, n_runs=1)
+    metric = Metric(max_label=21, n_runs=5)
     labels = [class2labels[i] for i in labels_split[test_label_split_value]] + [0]
 
     with torch.no_grad():
-        for run in range(1):
+        for run in range(5):
             for batch, idx in tqdm(iterator, desc=f'Validation {run+1}'):
                 label_ids = [class2labels[batch['class'][0]]]  # [class2labels[batch['class'][0]]+1]
                 support_images = [batch["support_image"]]
