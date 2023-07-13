@@ -405,145 +405,145 @@ def main_worker(args):
 
 def test(model, iterator, class2labels, labels_split, test_label_split_value, criterion):
     model.eval()
-    metric = Metric(max_label=21, n_runs=5)
+    metric = Metric(max_label=21, n_runs=1)
     labels = [class2labels[i] for i in labels_split[test_label_split_value]] + [0]
 
     with torch.no_grad():
-        # for run in range(5):
-        for batch, idx in tqdm(iterator, desc=f'Validation {run + 1}'):
-            label_ids = [class2labels[batch['class'][0]]]  # [class2labels[batch['class'][0]]+1]
-            support_images = [batch["support_image"]]
-            support_fg_mask = [batch["support_fg_mask"]]
-            support_bg_mask = [batch["support_bg_mask"]]
-            query_images = batch["query_image"]
-            query_label = batch["query_label"][0]
+        for run in range(1):
+            for batch, idx in tqdm(iterator, desc=f'Validation {run + 1}'):
+                label_ids = [class2labels[batch['class'][0]]]  # [class2labels[batch['class'][0]]+1]
+                support_images = [batch["support_image"]]
+                support_fg_mask = [batch["support_fg_mask"]]
+                support_bg_mask = [batch["support_bg_mask"]]
+                query_images = batch["query_image"]
+                query_label = batch["query_label"][0]
 
-            if config.TRAIN.ARCH == "FPMMs" or config.TRAIN.ARCH == "FPMMs_vgg" or config.TRAIN.ARCH == "FRPMMs":
-                support_images = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_images])
-                support_fg_mask = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_fg_mask])
-                support_bg_mask = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_bg_mask])
-                query_images = torch.stack([query_image.cuda(config.GPU) for query_image in query_images])
-                query_label = query_label.cuda(config.GPU)
+                if config.TRAIN.ARCH == "FPMMs" or config.TRAIN.ARCH == "FPMMs_vgg" or config.TRAIN.ARCH == "FRPMMs":
+                    support_images = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_images])
+                    support_fg_mask = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_fg_mask])
+                    support_bg_mask = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_bg_mask])
+                    query_images = torch.stack([query_image.cuda(config.GPU) for query_image in query_images])
+                    query_label = query_label.cuda(config.GPU)
 
-                sup_imgs = support_images.swapaxes(1, 2)[0]
-                sup_mask = support_fg_mask.swapaxes(1, 2)[0][:, :, None, :, :]
-                qur_lbl = torch.stack([query_label]).swapaxes(0, 1)
-                qur_img = query_images[0]
+                    sup_imgs = support_images.swapaxes(1, 2)[0]
+                    sup_mask = support_fg_mask.swapaxes(1, 2)[0][:, :, None, :, :]
+                    qur_lbl = torch.stack([query_label]).swapaxes(0, 1)
+                    qur_img = query_images[0]
 
-                logits = model(qur_img,
-                               sup_imgs,
-                               sup_mask)
-                loss_val, loss_part1, loss_part2 = model.get_loss(
-                    logits,
-                    qur_lbl,
-                    idx
-                )
-                out_softmax, pred = model.get_pred(
-                    logits,
-                    qur_img
-                )
-
-                loss = loss_val
-                query_pred = out_softmax
-                metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
-                              np.array(query_label[0].cpu()),
-                              labels=label_ids, n_run=run)
-            elif config.TRAIN.ARCH == 'PAnet' or config.TRAIN.ARCH == 'PAnet_new':
-                support_images = [[shot.cuda(config.GPU) for shot in way] for way in support_images]
-                support_fg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_fg_mask]
-                support_bg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_bg_mask]
-                query_images = [query_image.cuda(config.GPU) for query_image in query_images]
-                query_label = query_label.cuda(config.GPU)
-
-                # query_pred, align_loss = model(support_images, support_fg_mask, support_bg_mask, query_images)
-                # query_loss = criterion(query_pred, query_label)
-                # loss = query_loss + align_loss * 1
-
-                logit_mask_agg = 0
-                n_shot = len(support_images[0])
-                for s_idx in range(n_shot):
-                    query_pred, align_loss = model(
-                        [[support_images[0][s_idx]]],
-                        [[support_fg_mask[0][s_idx]]],
-                        [[support_bg_mask[0][s_idx]]],
-                        query_images
+                    logits = model(qur_img,
+                                   sup_imgs,
+                                   sup_mask)
+                    loss_val, loss_part1, loss_part2 = model.get_loss(
+                        logits,
+                        qur_lbl,
+                        idx
+                    )
+                    out_softmax, pred = model.get_pred(
+                        logits,
+                        qur_img
                     )
 
-                    logit_mask_agg += query_pred.argmax(dim=1).clone()
+                    loss = loss_val
+                    query_pred = out_softmax
+                    metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
+                                  np.array(query_label[0].cpu()),
+                                  labels=label_ids, n_run=run)
+                elif config.TRAIN.ARCH == 'PAnet' or config.TRAIN.ARCH == 'PAnet_new':
+                    support_images = [[shot.cuda(config.GPU) for shot in way] for way in support_images]
+                    support_fg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_fg_mask]
+                    support_bg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_bg_mask]
+                    query_images = [query_image.cuda(config.GPU) for query_image in query_images]
+                    query_label = query_label.cuda(config.GPU)
 
-                if n_shot > 1:
-                    bsz = logit_mask_agg.size(0)
-                    max_vote = logit_mask_agg.view(bsz, -1).max(dim=1)[0]
-                    max_vote = torch.stack([max_vote, torch.ones_like(max_vote).long()])
-                    max_vote = max_vote.max(dim=0)[0].view(bsz, 1, 1)
-                    pred_mask = logit_mask_agg.float() / max_vote
-                    pred_mask[pred_mask < 0.5] = 0
-                    pred_mask[pred_mask >= 0.5] = 1
+                    # query_pred, align_loss = model(support_images, support_fg_mask, support_bg_mask, query_images)
+                    # query_loss = criterion(query_pred, query_label)
+                    # loss = query_loss + align_loss * 1
+
+                    logit_mask_agg = 0
+                    n_shot = len(support_images[0])
+                    for s_idx in range(n_shot):
+                        query_pred, align_loss = model(
+                            [[support_images[0][s_idx]]],
+                            [[support_fg_mask[0][s_idx]]],
+                            [[support_bg_mask[0][s_idx]]],
+                            query_images
+                        )
+
+                        logit_mask_agg += query_pred.argmax(dim=1).clone()
+
+                    if n_shot > 1:
+                        bsz = logit_mask_agg.size(0)
+                        max_vote = logit_mask_agg.view(bsz, -1).max(dim=1)[0]
+                        max_vote = torch.stack([max_vote, torch.ones_like(max_vote).long()])
+                        max_vote = max_vote.max(dim=0)[0].view(bsz, 1, 1)
+                        pred_mask = logit_mask_agg.float() / max_vote
+                        pred_mask[pred_mask < 0.5] = 0
+                        pred_mask[pred_mask >= 0.5] = 1
+                    else:
+                        pred_mask = logit_mask_agg
+                    loss = 0.0
+                    metric.record(pred_mask[0].cpu(),
+                                  np.array(query_label[0].cpu()),
+                                  labels=label_ids, n_run=run)
+                elif config.TRAIN.ARCH == 'hsnet':
+                    support_images = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_images])
+                    support_fg_mask = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_fg_mask])
+                    support_bg_mask = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_bg_mask])
+                    query_images = torch.stack([query_image.cuda(config.GPU) for query_image in query_images])
+                    query_label = query_label.cuda(config.GPU)
+
+                    sup_imgs = support_images.swapaxes(1, 2)[0]
+                    sup_mask = support_fg_mask.swapaxes(1, 2)[0]
+                    qur_lbl = torch.stack([query_label])[0]
+                    qur_img = query_images[0]
+
+                    pred_mask = model.predict_mask_nshot(
+                        qur_img,
+                        sup_imgs,
+                        sup_mask
+                    )
+
+                    loss = 0.0
+                    metric.record(np.array(pred_mask[0].cpu()),
+                                  np.array(query_label[0].cpu()),
+                                  labels=label_ids, n_run=run)
+                elif config.TRAIN.ARCH == 'asnet':
+                    support_images = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_images])
+                    support_fg_mask = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_fg_mask])
+                    support_bg_mask = torch.stack(
+                        [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_bg_mask])
+                    query_images = torch.stack([query_image.cuda(config.GPU) for query_image in query_images])
+                    query_label = query_label.cuda(config.GPU)
+
+                    sup_imgs = support_images.swapaxes(1, 2)[0]
+                    sup_mask = support_fg_mask.swapaxes(1, 2)[0]
+                    qur_lbl = torch.stack([query_label])[0]
+                    qur_img = query_images[0]
+                    # print(sup_imgs.shape, sup_mask.shape, qur_lbl.shape, qur_img.shape)
+                    pred_mask = model.predict_mask_nshot(
+                        qur_img,
+                        sup_imgs,
+                        sup_mask
+                    )
+                    loss = 0.0
+                    metric.record(np.array(pred_mask[0].cpu()),
+                                  np.array(query_label[0].cpu()),
+                                  labels=label_ids, n_run=run)
                 else:
-                    pred_mask = logit_mask_agg
-                loss = 0.0
-                metric.record(pred_mask[0].cpu(),
-                              np.array(query_label[0].cpu()),
-                              labels=label_ids, n_run=run)
-            elif config.TRAIN.ARCH == 'hsnet':
-                support_images = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_images])
-                support_fg_mask = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_fg_mask])
-                support_bg_mask = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_bg_mask])
-                query_images = torch.stack([query_image.cuda(config.GPU) for query_image in query_images])
-                query_label = query_label.cuda(config.GPU)
+                    print("no model found")
+                    loss = None
+                    exit()
 
-                sup_imgs = support_images.swapaxes(1, 2)[0]
-                sup_mask = support_fg_mask.swapaxes(1, 2)[0]
-                qur_lbl = torch.stack([query_label])[0]
-                qur_img = query_images[0]
-
-                pred_mask = model.predict_mask_nshot(
-                    qur_img,
-                    sup_imgs,
-                    sup_mask
-                )
-
-                loss = 0.0
-                metric.record(np.array(pred_mask[0].cpu()),
-                              np.array(query_label[0].cpu()),
-                              labels=label_ids, n_run=run)
-            elif config.TRAIN.ARCH == 'asnet':
-                support_images = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_images])
-                support_fg_mask = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_fg_mask])
-                support_bg_mask = torch.stack(
-                    [torch.stack([shot.cuda(config.GPU) for shot in way]) for way in support_bg_mask])
-                query_images = torch.stack([query_image.cuda(config.GPU) for query_image in query_images])
-                query_label = query_label.cuda(config.GPU)
-
-                sup_imgs = support_images.swapaxes(1, 2)[0]
-                sup_mask = support_fg_mask.swapaxes(1, 2)[0]
-                qur_lbl = torch.stack([query_label])[0]
-                qur_img = query_images[0]
-                # print(sup_imgs.shape, sup_mask.shape, qur_lbl.shape, qur_img.shape)
-                pred_mask = model.predict_mask_nshot(
-                    qur_img,
-                    sup_imgs,
-                    sup_mask
-                )
-                loss = 0.0
-                metric.record(np.array(pred_mask[0].cpu()),
-                              np.array(query_label[0].cpu()),
-                              labels=label_ids, n_run=run)
-            else:
-                print("no model found")
-                loss = None
-                exit()
-
-            # classIoU, meanIoU = metric.get_mIoU(labels=sorted(labels), n_runs=run)
-            # classIoU_binary, meanIoU_binary = metric.get_mIoU_binary(n_run=run)
+            classIoU, meanIoU = metric.get_mIoU(labels=sorted(labels), n_run=run)
+            classIoU_binary, meanIoU_binary = metric.get_mIoU_binary(n_run=run)
 
     classIoU, classIoU_std, meanIoU, meanIoU_std = metric.get_mIoU(labels=sorted(labels))
     classIoU_binary, classIoU_std_binary, meanIoU_binary, meanIoU_std_binary = metric.get_mIoU_binary()
