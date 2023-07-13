@@ -103,9 +103,11 @@ def get_model():
         #         {'params': model.d2_conv.parameters()},
         #     ],  **optimizer_val
         # )
-        # lr_milestones = config.TRAIN.LR_MILESTONE
-        # scheduler = MultiStepLR(optimizer, milestones=lr_milestones, gamma=config.TRAIN.GAMMA)
-        scheduler = None
+        if config.TRAIN.ARCH == 'PAnet':
+            lr_milestones = config.TRAIN.LR_MILESTONE
+            scheduler = MultiStepLR(optimizer, milestones=lr_milestones, gamma=config.TRAIN.GAMMA)
+        elif config.TRAIN.ARCH == 'PAnet_new':
+            scheduler = None
         criterion = nn.CrossEntropyLoss(ignore_index=config.TRAIN.IGNORE_LABEL)
         print("PAnet model will be used ......")
         return model, optimizer, criterion, scheduler
@@ -549,7 +551,7 @@ def train(model, iterator, optimizer, scheduler, criterion, epoch):
                 scheduler.step()
             epoch_loss += loss.detach().data.cpu().numpy()
             epoch_align_loss += 0
-        elif config.TRAIN.ARCH == 'PAnet':
+        elif config.TRAIN.ARCH == 'PAnet_new':
             support_images = [[shot.cuda(config.GPU) for shot in way] for way in support_images]
             support_fg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_fg_mask]
             support_bg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_bg_mask]
@@ -576,6 +578,27 @@ def train(model, iterator, optimizer, scheduler, criterion, epoch):
             optimizer.step()
             if scheduler is not None:
                 scheduler.step()
+            # print(torch.unique(query_pred), query_pred.shape)
+            # print(torch.unique(query_pred[0][0]), query_pred[0][0].shape)
+            # print(torch.unique(query_pred[0][1]), query_pred[0][1].shape)
+            # print(np.unique(query_pred.max(1)[1].cpu().numpy()), query_pred.max(1)[1].shape)
+            epoch_loss += loss.detach().data.cpu().numpy()
+            epoch_align_loss += align_loss.detach().data.cpu().numpy() if align_loss != 0 else 0
+
+        elif config.TRAIN.ARCH == 'PAnet':
+            support_images = [[shot.cuda(config.GPU) for shot in way] for way in support_images]
+            support_fg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_fg_mask]
+            support_bg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_bg_mask]
+            query_images = [query_image.cuda(config.GPU) for query_image in query_images]
+            query_label = query_label.cuda(config.GPU)
+
+            query_pred, align_loss = model(support_images, support_fg_mask, support_bg_mask, query_images)
+            query_loss = criterion(query_pred, query_label)
+            loss = query_loss + align_loss * 1
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            scheduler.step()
             # print(torch.unique(query_pred), query_pred.shape)
             # print(torch.unique(query_pred[0][0]), query_pred[0][0].shape)
             # print(torch.unique(query_pred[0][1]), query_pred[0][1].shape)
