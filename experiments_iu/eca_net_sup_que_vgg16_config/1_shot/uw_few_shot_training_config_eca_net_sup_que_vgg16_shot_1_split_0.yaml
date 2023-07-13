@@ -44,7 +44,7 @@ TRAIN:
   VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
   SCALE_VAL: 1
   PRETRAINED_MODEL: ''
-  PA_NET_TYPE: 'eca_net_sup_que'
+  PA_NET_TYPE: 'eca_net_sup_que_vgg16'
   RANDOM_SPLIT: False
 
 # PA_NET_TYPE: 'eca_net_sup_que'

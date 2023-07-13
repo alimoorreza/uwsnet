@@ -1,34 +1,34 @@
 GPU: 0
-LOG_DIR: '/content/log/'
+LOG_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/log/'
 DATA_DIR: ''
-OUTPUT_DIR: '/content/output/'
+OUTPUT_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/output/'
 WORKERS: 2
-BASE_DIR: '/content/uwsnet/'
+BASE_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
 CLASSES: 2
 
 MODEL:
-  NAME: PAnet
+  NAME: FPMMs
 CUDNN:
   BENCHMARK: true
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
-  ROOT: '/content/'
-  IMAGE_W: 473
-  IMAGE_H: 473
+  ROOT: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
+  IMAGE_W: 417
+  IMAGE_H: 417
 TEST:
   BATCH_SIZE_PER_GPU: 1
 TRAIN:
-  ARCH: PAnet
-  TRAIN_H: 473
-  TRAIN_W: 473
+  ARCH: FPMMs
+  TRAIN_H: 417
+  TRAIN_W: 417
   BATCH_SIZE: 1
   BATCH_SIZE_VAL: 1
   END_EPOCH: 40
   BEGIN_EPOCH: 0
   PRINT_FREQ: 100
   SAVE_FREQ: 1
-  BASE_LR: 0.001
+  BASE_LR: 3.5e-4
   MOMENTUM: 0.9
   POWER: 0.9
   WEIGHT_DECAY: 0.0005
@@ -36,18 +36,12 @@ TRAIN:
   SAVE_PATH: default
   RESUME:  True
   EVALUATE: True
-  TEST_LABEL_SPLIT_VALUE: 0
+  TEST_LABEL_SPLIT_VALUE: 1
   N_WAYS: 1
   N_SHOTS: 1
   EPISODE: 1000
   LR_MILESTONE: [10000, 20000, 30000, 40000]
-  VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
   SCALE_VAL: 1
   PRETRAINED_MODEL: ''
-  PA_NET_TYPE: 'eca_net_sup_que'
   RANDOM_SPLIT: False
 
-# PA_NET_TYPE: 'eca_net_sup_que'
-# PA_NET_TYPE: 'eca_net_sup_que_vgg16'
-# PA_NET_TYPE: 'triplet_sup_que_vgg16'
-# PA_NET_TYPE: 'triplet_sup_que_vgg16_dice'

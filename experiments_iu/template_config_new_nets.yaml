@@ -1,9 +1,9 @@
 GPU: 0
-LOG_DIR: '/content/log/'
+LOG_DIR: '__log_dir__'
 DATA_DIR: ''
-OUTPUT_DIR: '/content/output/'
+OUTPUT_DIR: '__output_dir__'
 WORKERS: 2
-BASE_DIR: '/content/uwsnet/'
+BASE_DIR: '__base_dir__'
 CLASSES: 2
 
 MODEL:
@@ -13,11 +13,9 @@ CUDNN:
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
-  ROOT: '/content/'
+  ROOT: '__dataset_root__'
   IMAGE_W: 473
   IMAGE_H: 473
-TEST:
-  BATCH_SIZE_PER_GPU: 1
 TRAIN:
   ARCH: PAnet
   TRAIN_H: 473
@@ -31,23 +29,26 @@ TRAIN:
   BASE_LR: 0.001
   MOMENTUM: 0.9
   POWER: 0.9
-  WEIGHT_DECAY: 0.0005
+  WEIGHT_DECAY: 0.0001
   GAMMA: 0.1
+  WARMUP: False
   SAVE_PATH: default
   RESUME:  True
   EVALUATE: True
-  TEST_LABEL_SPLIT_VALUE: 0
+  TEST_LABEL_SPLIT_VALUE: __split__
   N_WAYS: 1
-  N_SHOTS: 1
+  N_SHOTS: __shot__
   EPISODE: 1000
   LR_MILESTONE: [10000, 20000, 30000, 40000]
-  VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
+  VGG_MODEL_PATH: '__vgg_model_path__'
   SCALE_VAL: 1
   PRETRAINED_MODEL: ''
-  PA_NET_TYPE: 'eca_net_sup_que'
+  PA_NET_TYPE: '__net_type__'
+  NEW_NET_BACKBONE_TYPE: '__backbone_type__'
   RANDOM_SPLIT: False
 
 # PA_NET_TYPE: 'eca_net_sup_que'
 # PA_NET_TYPE: 'eca_net_sup_que_vgg16'
 # PA_NET_TYPE: 'triplet_sup_que_vgg16'
 # PA_NET_TYPE: 'triplet_sup_que_vgg16_dice'
+

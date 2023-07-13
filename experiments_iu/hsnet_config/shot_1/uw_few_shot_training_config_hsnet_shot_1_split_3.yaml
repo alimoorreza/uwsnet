@@ -1,25 +1,25 @@
 GPU: 0
-LOG_DIR: '/content/log/'
+LOG_DIR: '/kaggle/working/log/'
 DATA_DIR: ''
-OUTPUT_DIR: '/content/output/'
+OUTPUT_DIR: '/kaggle/working/output/'
 WORKERS: 2
-BASE_DIR: '/content/uwsnet/'
+BASE_DIR: '/kaggle/working/underwater_few_shot/'
 CLASSES: 2
 
 MODEL:
-  NAME: PAnet
+  NAME: hsnet
 CUDNN:
   BENCHMARK: true
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
-  ROOT: '/content/'
+  ROOT: '/kaggle/input/under-water-few-shot/'
   IMAGE_W: 473
   IMAGE_H: 473
 TEST:
   BATCH_SIZE_PER_GPU: 1
 TRAIN:
-  ARCH: PAnet
+  ARCH: hsnet
   TRAIN_H: 473
   TRAIN_W: 473
   BATCH_SIZE: 1
@@ -36,16 +36,15 @@ TRAIN:
   SAVE_PATH: default
   RESUME:  True
   EVALUATE: True
-  TEST_LABEL_SPLIT_VALUE: 0
+  TEST_LABEL_SPLIT_VALUE: 3
   N_WAYS: 1
   N_SHOTS: 1
   EPISODE: 1000
-  LR_MILESTONE: [10000, 20000, 30000, 40000]
-  VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
   SCALE_VAL: 1
   PRETRAINED_MODEL: ''
-  PA_NET_TYPE: 'eca_net_sup_que'
+  PA_NET_TYPE: ''
   RANDOM_SPLIT: False
+  HSNET_BB: 'resnet50'
 
 # PA_NET_TYPE: 'eca_net_sup_que'
 # PA_NET_TYPE: 'eca_net_sup_que_vgg16'
