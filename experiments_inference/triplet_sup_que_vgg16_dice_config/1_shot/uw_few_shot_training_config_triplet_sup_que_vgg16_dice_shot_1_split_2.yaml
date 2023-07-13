@@ -45,7 +45,7 @@ TRAIN:
   SCALE_VAL: 1
   PRETRAINED_MODEL: '/content/fewshot_trained_model/UWSNetV6/shot_1/split_3/2_split_1_nways_1_nshots_4_epoch_iou_0.669_model.pth.tar'
   PA_NET_TYPE: 'triplet_sup_que_vgg16_dice'
-  RANDOM_SPLIT: True
+  RANDOM_SPLIT: False
 
 # PA_NET_TYPE: 'eca_net_sup_que'
 # PA_NET_TYPE: 'eca_net_sup_que_vgg16'
