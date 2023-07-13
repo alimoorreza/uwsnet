@@ -41,7 +41,7 @@ TRAIN:
   N_SHOTS: 5
   EPISODE: 1000
   LR_MILESTONE: [10000, 20000, 30000, 40000]
-  VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'3af.pth'
+  VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
   SCALE_VAL: 1
   PRETRAINED_MODEL: ''
   PA_NET_TYPE: 'eca_net_sup_que_vgg16'
