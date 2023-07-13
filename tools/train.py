@@ -35,7 +35,7 @@ def get_model():
         scheduler = None
         print("FRMMs model will be used ......")
         return model, optimizer, criterion, scheduler
-    elif config.TRAIN.ARCH == 'PAnet':
+    elif config.TRAIN.ARCH == 'PAnet' or config.TRAIN.ARCH == 'PAnet_new':
         """
             UWSNet v1 -> eca_net_sup_que
             UWSNet v2 -> eca_net_sup_que_vgg16
@@ -106,7 +106,7 @@ def get_model():
         if config.TRAIN.ARCH == 'PAnet':
             lr_milestones = config.TRAIN.LR_MILESTONE
             scheduler = MultiStepLR(optimizer, milestones=lr_milestones, gamma=config.TRAIN.GAMMA)
-        elif config.TRAIN.ARCH == 'PAnet_new':
+        else:
             scheduler = None
         criterion = nn.CrossEntropyLoss(ignore_index=config.TRAIN.IGNORE_LABEL)
         print("PAnet model will be used ......")
