@@ -239,7 +239,6 @@ def main_worker(args):
     val_transform = Compose(
         [
             Resize(size=(config.TRAIN.TRAIN_H, config.TRAIN.TRAIN_W)),
-            RandomMirror(),
             ToTensorNormalize(mean=mean, std=std)
         ]
     )
