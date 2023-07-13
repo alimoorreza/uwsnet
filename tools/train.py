@@ -719,7 +719,7 @@ def validation(model, iterator, class2labels, labels_split, test_label_split_val
                     metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
                                   np.array(query_label[0].cpu()),
                                   labels=label_ids, n_run=run)
-                elif config.TRAIN.ARCH == 'PAnet':
+                elif config.TRAIN.ARCH == 'PAnet' or config.TRAIN.ARCH == 'PAnet_new':
                     support_images = [[shot.cuda(config.GPU) for shot in way] for way in support_images]
                     support_fg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_fg_mask]
                     support_bg_mask = [[shot.cuda(config.GPU) for shot in way] for way in support_bg_mask]
