@@ -235,10 +235,12 @@ def main_worker(args):
     directory = config.DATASET.ROOT
     labels_split = labels_split
     test_label_split_value = config.TRAIN.TEST_LABEL_SPLIT_VALUE
-    episode = config.TRAIN.EPISODE
+    episode_train = config.TRAIN.EPISODE_TRAIN
+    episode_eval = config.TRAIN.EPISODE_EVAL
     n_ways = config.TRAIN.N_WAYS
     n_shots = config.TRAIN.N_SHOTS
-    random_split = config.TRAIN.RANDOM_SPLIT
+    random_split_train = config.TRAIN.RANDOM_SPLIT_TRAIN
+    random_split_eval = config.TRAIN.RANDOM_SPLIT_EVAL
 
     if config.TRAIN.ARCH == "FPMMs" or \
             config.TRAIN.ARCH == "FPMMs_vgg" or \
@@ -250,24 +252,24 @@ def main_worker(args):
             class2labels,
             labels_split,
             test_label_split_value,
-            episode,
+            episode_train,
             n_ways,
             n_shots,
             validation=False,
             transform=train_transform,
-            random_split=random_split
+            random_split=random_split_train
         )
         validation_dataset = IUDataset(
             directory,
             class2labels,
             labels_split,
             test_label_split_value,
-            episode // 1,
+            episode_eval,
             n_ways,
             n_shots,
             validation=True,
             transform=val_transform,
-            random_split=random_split
+            random_split=random_split_eval
         )
     elif config.TRAIN.ARCH == 'hsnet' or config.TRAIN.ARCH == 'asnet':
         train_dataset = IUDataset(
@@ -275,24 +277,24 @@ def main_worker(args):
             class2labels,
             labels_split,
             test_label_split_value,
-            episode,
+            episode_train,
             n_ways,
             n_shots,
             validation=False,
             transform=train_transform,
-            random_split=random_split
+            random_split=random_split_train
         )
         validation_dataset = IUDataset(
             directory,
             class2labels,
             labels_split,
             test_label_split_value,
-            episode // 1,
+            episode_eval,
             n_ways,
             n_shots,
             validation=True,
             transform=val_transform,
-            random_split=random_split
+            random_split=random_split_eval
         )
     else:
         train_dataset = None

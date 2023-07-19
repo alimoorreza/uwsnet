@@ -246,10 +246,12 @@ def main_worker(args):
     directory = config.DATASET.ROOT
     labels_split = labels_split
     test_label_split_value = config.TRAIN.TEST_LABEL_SPLIT_VALUE
-    episode = config.TRAIN.EPISODE
+    episode_train = config.TRAIN.EPISODE_TRAIN
+    episode_eval = config.TRAIN.EPISODE_EVAL
     n_ways = config.TRAIN.N_WAYS
     n_shots = config.TRAIN.N_SHOTS
-    random_split = config.TRAIN.RANDOM_SPLIT
+    random_split_train = config.TRAIN.RANDOM_SPLIT_TRAIN
+    random_split_eval = config.TRAIN.RANDOM_SPLIT_EVAL
 
     if config.TRAIN.ARCH == "FPMMs" or \
             config.TRAIN.ARCH == "FPMMs_vgg" or \
@@ -261,24 +263,24 @@ def main_worker(args):
             class2labels,
             labels_split,
             test_label_split_value,
-            episode,
+            episode_train,
             n_ways,
             n_shots,
             validation=False,
             transform=train_transform,
-            random_split=random_split
+            random_split=random_split_train
         )
         validation_dataset = IUDataset(
             directory,
             class2labels,
             labels_split,
             test_label_split_value,
-            episode//1,
+            episode_eval,
             n_ways,
             n_shots,
             validation=True,
             transform=val_transform,
-            random_split=random_split
+            random_split=random_split_eval
         )
     elif config.TRAIN.ARCH == 'hsnet' or config.TRAIN.ARCH == 'asnet':
         train_dataset = IUDataset(
@@ -286,24 +288,24 @@ def main_worker(args):
             class2labels,
             labels_split,
             test_label_split_value,
-            episode,
+            episode_train,
             n_ways,
             n_shots,
             validation=False,
             transform=train_transform,
-            random_split=random_split
+            random_split=random_split_train
         )
         validation_dataset = IUDataset(
             directory,
             class2labels,
             labels_split,
             test_label_split_value,
-            episode // 1,
+            episode_eval,
             n_ways,
             n_shots,
             validation=True,
             transform=val_transform,
-            random_split=random_split
+            random_split=random_split_eval
         )
     else:
         train_dataset = None
@@ -510,8 +512,8 @@ def train(model, iterator, optimizer, scheduler, criterion, epoch):
             query_label = query_label.cuda(config.GPU)
 
             if scheduler is None:
-                max_iter = config.TRAIN.END_EPOCH * config.TRAIN.EPISODE
-                current_iter = (epoch - 1) * config.TRAIN.EPISODE + counter
+                max_iter = config.TRAIN.END_EPOCH * config.TRAIN.EPISODE_TRAIN
+                current_iter = (epoch - 1) * config.TRAIN.EPISODE_TRAIN + counter
                 my_optim.adjust_learning_rate_poly(
                     config,
                     max_iter,
@@ -559,14 +561,14 @@ def train(model, iterator, optimizer, scheduler, criterion, epoch):
             query_label = query_label.cuda(config.GPU)
 
             if scheduler is None:
-                current_iter = epoch * config.TRAIN.EPISODE + i + 1
+                current_iter = epoch * config.TRAIN.EPISODE_TRAIN + i + 1
                 index_split = -1
-                max_iter = config.TRAIN.END_EPOCH * config.TRAIN.EPISODE
+                max_iter = config.TRAIN.END_EPOCH * config.TRAIN.EPISODE_TRAIN
                 if config.TRAIN.BASE_LR > 1e-6:
                     optimizer = poly_lr_new_net(optimizer, config.TRAIN.BASE_LR, current_iter, max_iter,
                                                 power=config.TRAIN.POWER, index_split=index_split,
                                                 warmup=config.TRAIN.WARMUP,
-                                                warmup_step=config.TRAIN.EPISODE // 2)
+                                                warmup_step=config.TRAIN.EPISODE_TRAIN // 2)
             query_pred, align_loss = model(support_images, support_fg_mask, support_bg_mask, query_images)
             # print('\n**********************************')
             # print(query_pred.shape, query_label.shape)
