@@ -45,7 +45,8 @@ TRAIN:
   SCALE_VAL: 1
   PRETRAINED_MODEL: ''
   PA_NET_TYPE: 'triplet_sup_que_dice'
-  RANDOM_SPLIT: False
+  RANDOM_SPLIT_TRAIN: True
+  RANDOM_SPLIT_EVAL: False
 
 # PA_NET_TYPE: 'eca_net_sup_que'
 # PA_NET_TYPE: 'eca_net_sup_que_vgg16'
