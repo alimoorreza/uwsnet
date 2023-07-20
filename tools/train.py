@@ -44,10 +44,12 @@ def get_model():
             UWSNet v5 -> triplet_sup_que_vgg16
             UWSNet v6 -> triplet_sup_que_vgg16_dice
         """
-        if os.path.exists(config.TRAIN.VGG_MODEL_PATH):
-            vgg16_model_weight = config.TRAIN.VGG_MODEL_PATH
-        else:
-            vgg16_model_weight = None
+        vgg16_model_weight = None
+
+        if config.TRAIN.VGG_MODEL_PATH:
+            if os.path.exists(config.TRAIN.VGG_MODEL_PATH):
+                vgg16_model_weight = config.TRAIN.VGG_MODEL_PATH
+
         if config.TRAIN.PA_NET_TYPE == 'basic':
             from networks.few_shot import FewShotSeg
             model = FewShotSeg(pretrained_path=vgg16_model_weight, cfg={'align': True})
