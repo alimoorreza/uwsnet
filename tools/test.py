@@ -464,34 +464,34 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                     query_images = [query_image.cuda(config.GPU) for query_image in query_images]
                     query_label = query_label.cuda(config.GPU)
 
-                    # query_pred, align_loss = model(support_images, support_fg_mask, support_bg_mask, query_images)
+                    query_pred, _ = model(support_images, support_fg_mask, support_bg_mask, query_images)
                     # query_loss = criterion(query_pred, query_label)
                     # loss = query_loss + align_loss * 1
 
-                    logit_mask_agg = 0
-                    n_shot = len(support_images[0])
-                    for s_idx in range(n_shot):
-                        query_pred, align_loss = model(
-                            [[support_images[0][s_idx]]],
-                            [[support_fg_mask[0][s_idx]]],
-                            [[support_bg_mask[0][s_idx]]],
-                            query_images
-                        )
-
-                        logit_mask_agg += query_pred.argmax(dim=1).clone()
-
-                    if n_shot > 1:
-                        bsz = logit_mask_agg.size(0)
-                        max_vote = logit_mask_agg.view(bsz, -1).max(dim=1)[0]
-                        max_vote = torch.stack([max_vote, torch.ones_like(max_vote).long()])
-                        max_vote = max_vote.max(dim=0)[0].view(bsz, 1, 1)
-                        pred_mask = logit_mask_agg.float() / max_vote
-                        pred_mask[pred_mask < 0.5] = 0
-                        pred_mask[pred_mask >= 0.5] = 1
-                    else:
-                        pred_mask = logit_mask_agg
+                    # logit_mask_agg = 0
+                    # n_shot = len(support_images[0])
+                    # for s_idx in range(n_shot):
+                    #     query_pred, align_loss = model(
+                    #         [[support_images[0][s_idx]]],
+                    #         [[support_fg_mask[0][s_idx]]],
+                    #         [[support_bg_mask[0][s_idx]]],
+                    #         query_images
+                    #     )
+                    #
+                    #     logit_mask_agg += query_pred.argmax(dim=1).clone()
+                    #
+                    # if n_shot > 1:
+                    #     bsz = logit_mask_agg.size(0)
+                    #     max_vote = logit_mask_agg.view(bsz, -1).max(dim=1)[0]
+                    #     max_vote = torch.stack([max_vote, torch.ones_like(max_vote).long()])
+                    #     max_vote = max_vote.max(dim=0)[0].view(bsz, 1, 1)
+                    #     pred_mask = logit_mask_agg.float() / max_vote
+                    #     pred_mask[pred_mask < 0.5] = 0
+                    #     pred_mask[pred_mask >= 0.5] = 1
+                    # else:
+                    #     pred_mask = logit_mask_agg
                     loss = 0.0
-                    metric.record(pred_mask[0].cpu(),
+                    metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
                                   np.array(query_label[0].cpu()),
                                   labels=label_ids, n_run=run)
                 elif config.TRAIN.ARCH == 'hsnet':
