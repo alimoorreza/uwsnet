@@ -524,5 +524,111 @@ source ../../object_grasping/dl4grasp/bin/activate
 bash train_with_triplet_sup_que_vgg16_dice.sh 5 3
 
 
+##################################### UWSNetv5 ####################################
+#----------------------------------- train_with_triplet_sup_que_vgg16 1 shot -----------------------------------
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_1_0
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 1 0
+
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_1_1
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 1 1
+
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_1_2
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 1 2
+
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_1_3
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 1 3
+
+
+#----------------------------------- train_with_triplet_sup_que_vgg16 5 shot -----------------------------------
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_5_0
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 5 0
+
+electrike gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_5_1
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 5 1
+
+electrike gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_5_2
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 5 2
+
+electrike gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_5_3
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16.sh 5 3
+
+
+##################################### UWSNetv6 ####################################
+#----------------------------------- train_with_triplet_sup_que_vgg16_dice_dice 1 shot -----------------------------------
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_1_0
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 1 0
+
+ampharos gpu 5:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_1_1
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 1 1
+
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_1_2
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 1 2
+
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_1_3
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 1 3
+
+
+#----------------------------------- train_with_triplet_sup_que_vgg16_dice 5 shot -----------------------------------
+electrike gpu 0:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_5_0
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 5 0
+
+electrike gpu 1:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_5_1
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 5 1
+
+electrike gpu 2:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_5_2
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 5 2
+
+electrike gpu 3:
+cd /nfs/jolteon/data/ssd/mdreza/underwater_few_shot/uwsnet/bash_scripts/
+screen -S train_with_triplet_sup_que_vgg16_dice_5_3
+source ../../../object_grasping/dl4grasp/bin/activate
+bash train_with_triplet_sup_que_vgg16_dice.sh 5 3
+
+
 # https://chi2023.acm.org/2022/04/14/chi23-updated-revise-and-resubmit-paper-process/
 # https://www.icra2023.org/programme
