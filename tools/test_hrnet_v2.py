@@ -80,13 +80,13 @@ def main():
     gpus = list(config.GPUS)
 
     model = eval('models.' + config.MODEL.NAME +
-                 '.get_seg_model')(config)
+                 '.get_seg_model_eval')(config)
 
     batch_size = config.TRAIN.BATCH_SIZE_PER_GPU
 
     # prepare data
     mean, std = get_imagenet_mean_std()
-    
+
     if config.DATASET.DATASET == 'UWS':
         # transform.ResizeTest((config.TRAIN.TRAIN_H, config.TRAIN.TRAIN_W)),
         # transform.ResizeShort(config.TRAIN.SHORT_SIZE),
@@ -522,28 +522,28 @@ def main():
 
     best_mIoU = 0
     last_epoch = 0
-    if config.TRAIN.RESUME:
-        model_state_file = os.path.join(final_output_dir,
-                                        'checkpoint.pth.tar')
-        if os.path.isfile(model_state_file):
-            checkpoint = torch.load(model_state_file, map_location={'cuda:0': 'cpu'})
-            best_mIoU = checkpoint['best_mIoU']
-            last_epoch = checkpoint['epoch']
-            dct = checkpoint['state_dict']
-
-            model.module.model.load_state_dict(
-                {k.replace('model.', ''): v for k, v in checkpoint['state_dict'].items() if k.startswith('model.')})
-            optimizer.load_state_dict(checkpoint['optimizer'])
-            logger.info("=> loaded checkpoint (epoch {})"
-                        .format(checkpoint['epoch']))
-
-    # if config.MODEL.PRETRAINED:
-    #     model_state_file = config.MODEL.PRETRAINED
+    # if config.TRAIN.RESUME:
+    #     model_state_file = os.path.join(final_output_dir,
+    #                                     'checkpoint.pth.tar')
     #     if os.path.isfile(model_state_file):
     #         checkpoint = torch.load(model_state_file, map_location={'cuda:0': 'cpu'})
-    #         model.module.load_state_dict(checkpoint)
-    #         logger.info("=> loaded pretrained model {}"
-    #                     .format(config.MODEL.PRETRAINED))
+    #         best_mIoU = checkpoint['best_mIoU']
+    #         last_epoch = checkpoint['epoch']
+    #         dct = checkpoint['state_dict']
+    #
+    #         model.module.model.load_state_dict(
+    #             {k.replace('model.', ''): v for k, v in checkpoint['state_dict'].items() if k.startswith('model.')})
+    #         optimizer.load_state_dict(checkpoint['optimizer'])
+    #         logger.info("=> loaded checkpoint (epoch {})"
+    #                     .format(checkpoint['epoch']))
+
+    if config.MODEL.PRETRAINED:
+        model_state_file = config.MODEL.PRETRAINED
+        if os.path.isfile(model_state_file):
+            checkpoint = torch.load(model_state_file, map_location={'cuda:0': 'cpu'})
+            model.module.load_state_dict(checkpoint)
+            logger.info("=> loaded pretrained model {}"
+                        .format(config.MODEL.PRETRAINED))
 
     extra_epoch_iters = 0
     start = timeit.default_timer()
