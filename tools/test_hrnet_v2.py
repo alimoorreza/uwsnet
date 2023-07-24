@@ -293,23 +293,42 @@ def main():
     gpus = list(config.GPUS)
     model = nn.DataParallel(model, device_ids=gpus).cuda()
 
-    extra_epoch_iters = 0
     start = timeit.default_timer()
-    # end_epoch = config.TRAIN.END_EPOCH + config.TRAIN.EXTRA_EPOCH
-    # num_iters = config.TRAIN.END_EPOCH * epoch_iters
-    # extra_iters = config.TRAIN.EXTRA_EPOCH * extra_epoch_iters
 
-    valid_loss, mean_IoU, IoU_array = validate(config,
-                                               val_loader, model, writer_dict)
+    # valid_loss, mean_IoU, IoU_array = validate(config,
+    #                                            val_loader, model, writer_dict)
+    #
+    # msg = 'Loss: {:.3f}, MeanIU: {: 4.4f}'.format(
+    #     valid_loss, mean_IoU)
+    # logging.info(msg)
+    # logging.info(IoU_array)
+    #
+    # writer_dict['writer'].close()
+    # end = timeit.default_timer()
+    # logger.info('Hours: %d' % np.int((end - start) / 3600))
+    # logger.info('Done')
 
-    msg = 'Loss: {:.3f}, MeanIU: {: 4.4f}'.format(
-        valid_loss, mean_IoU)
-    logging.info(msg)
-    logging.info(IoU_array)
+    start = timeit.default_timer()
+    if 'val' in config.DATASET.TEST_SET:
+        mean_IoU, IoU_array, pixel_acc, mean_acc = testval(config,
+                                                           test_dataset,
+                                                           testloader,
+                                                           model)
 
-    writer_dict['writer'].close()
+        msg = 'MeanIU: {: 4.4f}, Pixel_Acc: {: 4.4f}, \
+                Mean_Acc: {: 4.4f}, Class IoU: '.format(mean_IoU,
+                                                        pixel_acc, mean_acc)
+        logging.info(msg)
+        logging.info(IoU_array)
+    elif 'test' in config.DATASET.TEST_SET:
+        test(config,
+             test_dataset,
+             testloader,
+             model,
+             sv_dir=final_output_dir)
+
     end = timeit.default_timer()
-    logger.info('Hours: %d' % np.int((end - start) / 3600))
+    logger.info('Mins: %d' % np.int((end - start) / 60))
     logger.info('Done')
 
 
