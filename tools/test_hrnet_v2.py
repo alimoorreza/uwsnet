@@ -311,8 +311,8 @@ def main():
     start = timeit.default_timer()
     if 'val' in config.DATASET.TEST_SET:
         mean_IoU, IoU_array, pixel_acc, mean_acc = testval(config,
-                                                           test_dataset,
-                                                           testloader,
+                                                           val_dataset,
+                                                           val_loader,
                                                            model)
 
         msg = 'MeanIU: {: 4.4f}, Pixel_Acc: {: 4.4f}, \
@@ -322,8 +322,8 @@ def main():
         logging.info(IoU_array)
     elif 'test' in config.DATASET.TEST_SET:
         test(config,
-             test_dataset,
-             testloader,
+             val_dataset,
+             val_loader,
              model,
              sv_dir=final_output_dir)
 
