@@ -3,21 +3,21 @@ CUDNN:
   DETERMINISTIC: false
   ENABLED: true
 GPUS: (0,)
-LOG_DIR: '/kaggle/working/log'
-OUTPUT_DIR: '/kaggle/working/output'
+LOG_DIR: '/content/log'
+OUTPUT_DIR: '/content/output'
 WORKERS: 2
 PRINT_FREQ: 5
 
 DATASET:
   DATASET: UWS3
-  ROOT: '/kaggle/input/under-water-few-shot/dataset/dataset/'
-  TEST_SET: '/kaggle/input/under-water-few-shot/validation_indices_sem_seg_2.txt'
-  TRAIN_SET: '/kaggle/input/under-water-few-shot/train_indices_sem_seg_2.txt'
+  ROOT: '/content/uw_sem_seg_dataset'
+  TEST_SET: 'validation'
+  TRAIN_SET: 'train'
   NUM_CLASSES: 29
 MODEL:
   NAME: seg_hrnet
   ALIGN_CORNERS: False
-  PRETRAINED: '../input/hrnet-trained-model-uws-dataset/best.pth'
+  PRETRAINED: '/content/HRNetV2/best.pth'
   EXTRA:
     FINAL_CONV_KERNEL: 1
     STAGE1:
