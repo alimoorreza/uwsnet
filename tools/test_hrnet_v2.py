@@ -18,8 +18,9 @@ from networks import hrnet_v2 as models
 
 from config import config_hrnet_v2 as config
 from config import update_config_hrnet_v2 as update_config
+from core.criterion import CrossEntropy, OhemCrossEntropy
 from core.function import validate
-from utils.hrnet_v2_utils.utils import create_logger
+from utils.hrnet_v2_utils.utils import create_logger, FullModel
 from utils.hrnet_utils.normalization_utils import get_imagenet_mean_std
 from semantic_dataloader import UWFSDataLoader
 from semantic_dataloader_final import UWFSDataLoader as UWFSDataLoader2
@@ -475,29 +476,74 @@ def main():
     )
     logger.info(f'Validation loader has len: {len(val_loader)}')
 
-    if torch.__version__.startswith('1'):
-        module = eval('models.' + config.MODEL.NAME)
-        module.BatchNorm2d_class = module.BatchNorm2d = torch.nn.BatchNorm2d
-    model = eval('models.' + config.MODEL.NAME +
-                 '.get_seg_model')(config)
-
-    if config.TEST.MODEL_FILE:
-        model_state_file = config.TEST.MODEL_FILE
+    # criterion
+    if config.LOSS.USE_OHEM:
+        criterion = OhemCrossEntropy(ignore_label=config.TRAIN.IGNORE_LABEL,
+                                     thres=config.LOSS.OHEMTHRES,
+                                     min_kept=config.LOSS.OHEMKEEP)  # ,weight=train_dataset.class_weights)
     else:
-        model_state_file = os.path.join(final_output_dir, 'final_state.pth')
-    logger.info('=> loading model from {}'.format(model_state_file))
+        criterion = CrossEntropy(ignore_label=config.TRAIN.IGNORE_LABEL)  # ,weight=train_dataset.class_weights)
 
-    pretrained_dict = torch.load(model_state_file)
-    if 'state_dict' in pretrained_dict:
-        pretrained_dict = pretrained_dict['state_dict']
-    model_dict = model.state_dict()
-    pretrained_dict = {k[6:]: v for k, v in pretrained_dict.items()
-                       if k[6:] in model_dict.keys()}
-    for k, _ in pretrained_dict.items():
-        logger.info(
-            '=> loading {} from pretrained model'.format(k))
-    model_dict.update(pretrained_dict)
-    model.load_state_dict(model_dict)
+    model = FullModel(model, criterion)
+
+    model = nn.DataParallel(model, device_ids=gpus).cuda()
+    logger.info(f'Using DataParallel')
+
+    # optimizer
+    if config.TRAIN.OPTIMIZER == 'sgd':
+
+        params_dict = dict(model.named_parameters())
+        if config.TRAIN.NONBACKBONE_KEYWORDS:
+            bb_lr = []
+            nbb_lr = []
+            nbb_keys = set()
+            for k, param in params_dict.items():
+                if any(part in k for part in config.TRAIN.NONBACKBONE_KEYWORDS):
+                    nbb_lr.append(param)
+                    nbb_keys.add(k)
+                else:
+                    bb_lr.append(param)
+            print(nbb_keys)
+            params = [{'params': bb_lr, 'lr': config.TRAIN.LR},
+                      {'params': nbb_lr, 'lr': config.TRAIN.LR * config.TRAIN.NONBACKBONE_MULT}]
+        else:
+            params = [{'params': list(params_dict.values()), 'lr': config.TRAIN.LR}]
+
+        optimizer = torch.optim.SGD(params,
+                                    lr=config.TRAIN.LR,
+                                    momentum=config.TRAIN.MOMENTUM,
+                                    weight_decay=config.TRAIN.WD,
+                                    nesterov=config.TRAIN.NESTEROV,
+                                    )
+    else:
+        raise ValueError('Only Support SGD optimizer')
+
+    epoch_iters = int(train_dataset.__len__() / config.TRAIN.BATCH_SIZE_PER_GPU / len(gpus))
+
+    best_mIoU = 0
+    last_epoch = 0
+    if config.TRAIN.RESUME:
+        model_state_file = os.path.join(final_output_dir,
+                                        'checkpoint.pth.tar')
+        if os.path.isfile(model_state_file):
+            checkpoint = torch.load(model_state_file, map_location={'cuda:0': 'cpu'})
+            best_mIoU = checkpoint['best_mIoU']
+            last_epoch = checkpoint['epoch']
+            dct = checkpoint['state_dict']
+
+            model.module.model.load_state_dict(
+                {k.replace('model.', ''): v for k, v in checkpoint['state_dict'].items() if k.startswith('model.')})
+            optimizer.load_state_dict(checkpoint['optimizer'])
+            logger.info("=> loaded checkpoint (epoch {})"
+                        .format(checkpoint['epoch']))
+
+    if config.MODEL.PRETRAINED:
+        model_state_file = config.MODEL.PRETRAINED
+        if os.path.isfile(model_state_file):
+            checkpoint = torch.load(model_state_file, map_location={'cuda:0': 'cpu'})
+            model.module.load_state_dict(checkpoint)
+            logger.info("=> loaded pretrained model {}"
+                        .format(config.MODEL.PRETRAINED))
 
     extra_epoch_iters = 0
     start = timeit.default_timer()
