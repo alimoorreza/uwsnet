@@ -493,7 +493,4 @@ def get_seg_model(cfg, **kwargs):
     return model
 
 
-def get_seg_model_eval(cfg, **kwargs):
-    model = HighResolutionNet(cfg, **kwargs)
-
     return model
