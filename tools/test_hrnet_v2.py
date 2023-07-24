@@ -29,6 +29,8 @@ from tqdm import tqdm
 from scipy.io import loadmat
 from sklearn.model_selection import StratifiedShuffleSplit
 
+import glob
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train segmentation network')
@@ -316,180 +318,119 @@ def main():
             transform.ToTensor(),
             transform.Normalize(mean=mean, std=std),
         ]
-        
-        train_indices_file = config.DATASET.TRAIN_SET
-        val_indices_file = config.DATASET.TEST_SET
-        
-        with open(train_indices_file, 'r') as f:
-            train_indices = f.read().strip().split('\n')
-        
-        with open(val_indices_file, 'r') as f:
-            val_indices = f.read().strip().split('\n')
-        
+
+        train_dir = config.DATASET.TRAIN_SET
+        val_dir = config.DATASET.TEST_SET
+
+        images_files = glob.glob(
+            os.path.join(
+                config.DATASET.ROOT,
+                train_dir,
+                'images',
+                '*.png'
+            )
+        )
+        masks_files = \
+            [os.path.join(config.DATASET.ROOT, train_dir, 'labels', os.path.basename(m_i)) for m_i in images_files]
+
         images = []
         masks = []
-        im_classes = []
-        
-        for cls_fol in tqdm(train_indices):
-            mat = loadmat(os.path.join(config.DATASET.ROOT, cls_fol))
-            images.append(np.asarray(mat["image_array"]))
-            im_classes.append(mat["class"])
-            masks.append(np.asarray(mat["mask_array"]))
-        
+
+        for i_i_fl, img_fl in enumerate(tqdm(images_files)):
+            images.append(np.array(
+                Image.open(img_fl)
+            ))
+            masks.append(np.array(
+                Image.open(masks_files[i_i_fl])
+            ))
+
         dataset_len = len(images)
-        logger.info(f'Total train mat files: {dataset_len}')
+        logger.info(f'Total train image files: {dataset_len}')
         np.random.seed(0)
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//2))
+        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 2))
         for i in rand_n:
             im = images[i]
             target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
             # perform horizontal flip
             images.append(np.fliplr(im))
             masks.append(np.fliplr(target))
-        
+
         # shift right
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//4))
+        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 4))
         for i in rand_n:
             shift = 20
             im = images[i]
             target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-        
+
             im[:, shift:] = im[:, :-shift]
             target[:, shift:] = target[:, :-shift]
             images.append(im)
             masks.append(target)
-        
+
         # shift left
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//4))
+        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 4))
         for i in rand_n:
             shift = 20
             im = images[i]
             target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-        
+
             im[:, :-shift] = im[:, shift:]
             target[:, :-shift] = target[:, shift:]
             images.append(im)
             masks.append(target)
-        
+
         # shift up
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//4))
+        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 4))
         for i in rand_n:
             shift = 20
             im = images[i]
             target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-        
+
             im[:-shift, :] = im[shift:, :]
             target[:-shift, :] = target[shift:, :]
             images.append(im)
             masks.append(target)
-        
+
         # shift down
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//4))
+        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len // 4))
         for i in rand_n:
             shift = 20
             im = images[i]
             target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-        
+
             im[shift:, :] = im[:-shift, :]
             target[shift:, :] = target[:-shift, :]
             images.append(im)
             masks.append(target)
-        
+
         images_train = images
         masks_train = masks
-        
-        images = []
-        masks = []
-        im_classes = []
-        
-        for cls_fol in tqdm(val_indices):
-            mat = loadmat(os.path.join(config.DATASET.ROOT, cls_fol))
-            images.append(np.asarray(mat["image_array"]))
-            im_classes.append(mat["class"])
-            masks.append(np.asarray(mat["mask_array"]))
-        
-        dataset_len = len(images)
+
+        images_files = glob.glob(
+            os.path.join(
+                config.DATASET.ROOT,
+                val_dir,
+                'images',
+                '*.png'
+            )
+        )
+        masks_files = \
+            [os.path.join(config.DATASET.ROOT, val_dir, 'labels', os.path.basename(m_i)) for m_i in images_files]
+
+        images_test = []
+        masks_test = []
+
+        for i_i_fl, img_fl in enumerate(tqdm(images_files)):
+            images_test.append(np.array(
+                Image.open(img_fl)
+            ))
+            masks_test.append(np.array(
+                Image.open(masks_files[i_i_fl])
+            ))
+
+        dataset_len = len(images_test)
         logger.info(f'Total val mat files: {dataset_len}')
-        np.random.seed(0)
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//2))
-        for i in rand_n:
-            im = images[i]
-            target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-            # perform horizontal flip
-            images.append(np.fliplr(im))
-            masks.append(np.fliplr(target))
-        
-        # shift right
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//4))
-        for i in rand_n:
-            shift = 20
-            im = images[i]
-            target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-        
-            im[:, shift:] = im[:, :-shift]
-            target[:, shift:] = target[:, :-shift]
-            images.append(im)
-            masks.append(target)
-        
-        # shift left
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//4))
-        for i in rand_n:
-            shift = 20
-            im = images[i]
-            target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-        
-            im[:, :-shift] = im[:, shift:]
-            target[:, :-shift] = target[:, shift:]
-            images.append(im)
-            masks.append(target)
-        
-        # shift up
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//4))
-        for i in rand_n:
-            shift = 20
-            im = images[i]
-            target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-        
-            im[:-shift, :] = im[shift:, :]
-            target[:-shift, :] = target[shift:, :]
-            images.append(im)
-            masks.append(target)
-        
-        # shift down
-        rand_n = list(np.random.randint(low=0, high=dataset_len, size=dataset_len//4))
-        for i in rand_n:
-            shift = 20
-            im = images[i]
-            target = masks[i]
-            class_ = im_classes[i]
-            im_classes.append(class_)
-        
-            im[shift:, :] = im[:-shift, :]
-            target[shift:, :] = target[:-shift, :]
-            images.append(im)
-            masks.append(target)
-        
-        images_test = images
-        masks_test = masks
-        
+
         train_dataset = UWFSDataLoader2(
             output_image_height=config.TRAIN.IMAGE_SIZE[0],
             images=images_train,
