@@ -537,19 +537,19 @@ def main():
             logger.info("=> loaded checkpoint (epoch {})"
                         .format(checkpoint['epoch']))
 
-    if config.MODEL.PRETRAINED:
-        model_state_file = config.MODEL.PRETRAINED
-        if os.path.isfile(model_state_file):
-            checkpoint = torch.load(model_state_file, map_location={'cuda:0': 'cpu'})
-            model.module.load_state_dict(checkpoint)
-            logger.info("=> loaded pretrained model {}"
-                        .format(config.MODEL.PRETRAINED))
+    # if config.MODEL.PRETRAINED:
+    #     model_state_file = config.MODEL.PRETRAINED
+    #     if os.path.isfile(model_state_file):
+    #         checkpoint = torch.load(model_state_file, map_location={'cuda:0': 'cpu'})
+    #         model.module.load_state_dict(checkpoint)
+    #         logger.info("=> loaded pretrained model {}"
+    #                     .format(config.MODEL.PRETRAINED))
 
     extra_epoch_iters = 0
     start = timeit.default_timer()
-    end_epoch = config.TRAIN.END_EPOCH + config.TRAIN.EXTRA_EPOCH
-    num_iters = config.TRAIN.END_EPOCH * epoch_iters
-    extra_iters = config.TRAIN.EXTRA_EPOCH * extra_epoch_iters
+    # end_epoch = config.TRAIN.END_EPOCH + config.TRAIN.EXTRA_EPOCH
+    # num_iters = config.TRAIN.END_EPOCH * epoch_iters
+    # extra_iters = config.TRAIN.EXTRA_EPOCH * extra_epoch_iters
 
     valid_loss, mean_IoU, IoU_array = validate(config,
                                                train_loader, model, writer_dict)
