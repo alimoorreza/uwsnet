@@ -505,7 +505,7 @@ def main():
     # extra_iters = config.TRAIN.EXTRA_EPOCH * extra_epoch_iters
 
     valid_loss, mean_IoU, IoU_array = validate(config,
-                                               train_loader, model, writer_dict)
+                                               val_loader, model, writer_dict)
 
     msg = 'Loss: {:.3f}, MeanIU: {: 4.4f}'.format(
         valid_loss, mean_IoU)
