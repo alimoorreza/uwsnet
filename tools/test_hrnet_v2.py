@@ -19,6 +19,7 @@ from networks import hrnet_v2 as models
 from config import config_hrnet_v2 as config
 from config import update_config_hrnet_v2 as update_config
 from core.function import validate
+from utils.hrnet_v2_utils.utils import create_logger
 from utils.hrnet_utils.normalization_utils import get_imagenet_mean_std
 from semantic_dataloader import UWFSDataLoader
 from semantic_dataloader_final import UWFSDataLoader as UWFSDataLoader2
