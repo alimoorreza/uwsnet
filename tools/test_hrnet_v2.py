@@ -30,6 +30,7 @@ from scipy.io import loadmat
 from sklearn.model_selection import StratifiedShuffleSplit
 
 import glob
+from PIL import Image
 
 
 def parse_args():
