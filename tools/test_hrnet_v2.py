@@ -23,7 +23,7 @@ from core.function_2 import validate
 from utils.hrnet_v2_utils.utils import create_logger, FullModel
 from utils.hrnet_utils.normalization_utils import get_imagenet_mean_std
 from semantic_dataloader import UWFSDataLoader
-from semantic_dataloader_3 import UWFSDataLoader as UWFSDataLoader2
+from semantic_dataloader_final import UWFSDataLoader as UWFSDataLoader2
 from utils.hrnet_utils import transform
 from tqdm import tqdm
 from scipy.io import loadmat
