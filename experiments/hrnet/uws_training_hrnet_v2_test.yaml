@@ -97,7 +97,7 @@ TEST:
   - 256
   - 256
   BASE_SIZE: 255
-  BATCH_SIZE_PER_GPU: 16
+  BATCH_SIZE_PER_GPU: 1
   FLIP_TEST: false
   MULTI_SCALE: false
   MODEL_FILE: '/content/HRNetV2/best.pth'
