@@ -210,10 +210,10 @@ class UWFSDataLoaderVal(torch.utils.data.Dataset):
 
         size = img.shape
 
-        if self.normalizer:
-            image, label_image_gray = self.normalizer(img, label_image_gray)
-        else:
-            raise NotImplementedError("Normalizer not implemented...")
+        # if self.normalizer:
+        #     image, label_image_gray = self.normalizer(img, label_image_gray)
+        # else:
+        #     raise NotImplementedError("Normalizer not implemented...")
 
         return image, label_image_gray, np.array(size), f'{index}.png'
 
@@ -242,7 +242,7 @@ class UWFSDataLoaderVal(torch.utils.data.Dataset):
             new_img = new_img.transpose((2, 0, 1))
             new_img = np.expand_dims(new_img, axis=0)
             new_img = torch.from_numpy(new_img)
-            preds = self.inference(config, model, new_img, flip)
+            preds = self.inference(config, model, new_img, False)
             preds = preds[:, :, 0:height, 0:width]
 
             preds = F.interpolate(
