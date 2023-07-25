@@ -79,7 +79,7 @@ def main():
     cudnn.enabled = config.CUDNN.ENABLED
     gpus = list(config.GPUS)
 
-    batch_size = config.TRAIN.BATCH_SIZE_PER_GPU
+    batch_size = config.TEST.BATCH_SIZE_PER_GPU
 
     # prepare data
     mean, std = get_imagenet_mean_std()
