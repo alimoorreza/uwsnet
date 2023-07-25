@@ -42,7 +42,7 @@ TRAIN:
   EPISODE_TRAIN: 1000
   EPISODE_EVAL: 1000
   LR_MILESTONE: [10000, 20000, 30000, 40000]
-  VGG_MODEL_PATH: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/pretrained_backbone/vgg16-397923af.pth'
+  VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/pretrained_backbone/vgg16-397923af.pth'
   SCALE_VAL: 1
   PRETRAINED_MODEL: '/content/drive/MyDrive/underwater_fewshot_iros23/other_models/uw_few_shot_training_config_panet_shot_1_split_3/3_split_1_nways_1_nshots_10_epoch_iou_0.672_model.pth.tar'
   PA_NET_TYPE: 'basic'
