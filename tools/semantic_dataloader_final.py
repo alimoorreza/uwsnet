@@ -234,9 +234,9 @@ class UWFSDataLoaderVal(torch.utils.data.Dataset):
         final_pred = torch.zeros([1, self.num_classes,
                                   ori_height, ori_width]).cuda()
         for scale in scales:
-            new_img = self.multi_scale_aug(image=image,
-                                           rand_scale=scale,
-                                           rand_crop=False)
+            new_img = image  # self.multi_scale_aug(image=image,
+                                           # rand_scale=scale,
+                                           # rand_crop=False)
             height, width = new_img.shape[:-1]
 
             if scale <= 1.0:
