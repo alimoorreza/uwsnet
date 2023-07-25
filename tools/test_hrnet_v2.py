@@ -23,7 +23,7 @@ from core.function import validate, testval, test
 from utils.hrnet_v2_utils.utils import create_logger, FullModel
 from utils.hrnet_utils.normalization_utils import get_imagenet_mean_std
 from semantic_dataloader import UWFSDataLoader
-from semantic_dataloader_final import UWFSDataLoaderVal as UWFSDataLoader2
+from semantic_dataloader_final import UWFSDataLoader as UWFSDataLoader2
 from utils.hrnet_utils import transform
 from tqdm import tqdm
 from scipy.io import loadmat
@@ -298,46 +298,55 @@ def main():
     model_dict.update(pretrained_dict)
     model.load_state_dict(model_dict)
 
+    if config.LOSS.USE_OHEM:
+        criterion = OhemCrossEntropy(ignore_label=config.TRAIN.IGNORE_LABEL,
+                                     thres=config.LOSS.OHEMTHRES,
+                                     min_kept=config.LOSS.OHEMKEEP)  # ,weight=train_dataset.class_weights)
+    else:
+        criterion = CrossEntropy(ignore_label=config.TRAIN.IGNORE_LABEL)  # ,weight=train_dataset.class_weights)
+
+    model = FullModel(model, criterion)
+
     gpus = list(config.GPUS)
     model = nn.DataParallel(model, device_ids=gpus).cuda()
 
     start = timeit.default_timer()
 
-    # valid_loss, mean_IoU, IoU_array = validate(config,
-    #                                            val_loader, model, writer_dict)
-    #
-    # msg = 'Loss: {:.3f}, MeanIU: {: 4.4f}'.format(
-    #     valid_loss, mean_IoU)
-    # logging.info(msg)
-    # logging.info(IoU_array)
-    #
-    # writer_dict['writer'].close()
-    # end = timeit.default_timer()
-    # logger.info('Hours: %d' % np.int((end - start) / 3600))
-    # logger.info('Done')
+    valid_loss, mean_IoU, IoU_array = validate(config,
+                                               val_loader, model, writer_dict)
 
-    start = timeit.default_timer()
-    if 'val' in config.DATASET.TEST_SET:
-        mean_IoU, IoU_array, pixel_acc, mean_acc = testval(config,
-                                                           val_dataset,
-                                                           val_loader,
-                                                           model)
+    msg = 'Loss: {:.3f}, MeanIU: {: 4.4f}'.format(
+        valid_loss, mean_IoU)
+    logging.info(msg)
+    logging.info(IoU_array)
 
-        msg = 'MeanIU: {: 4.4f}, Pixel_Acc: {: 4.4f}, \
-                Mean_Acc: {: 4.4f}, Class IoU: '.format(mean_IoU,
-                                                        pixel_acc, mean_acc)
-        logging.info(msg)
-        logging.info(IoU_array)
-    elif 'test' in config.DATASET.TEST_SET:
-        test(config,
-             val_dataset,
-             val_loader,
-             model,
-             sv_dir=final_output_dir)
-
+    writer_dict['writer'].close()
     end = timeit.default_timer()
-    logger.info('Mins: %d' % np.int((end - start) / 60))
+    logger.info('Hours: %d' % np.int((end - start) / 3600))
     logger.info('Done')
+
+    # start = timeit.default_timer()
+    # if 'val' in config.DATASET.TEST_SET:
+    #     mean_IoU, IoU_array, pixel_acc, mean_acc = testval(config,
+    #                                                        val_dataset,
+    #                                                        val_loader,
+    #                                                        model)
+    #
+    #     msg = 'MeanIU: {: 4.4f}, Pixel_Acc: {: 4.4f}, \
+    #             Mean_Acc: {: 4.4f}, Class IoU: '.format(mean_IoU,
+    #                                                     pixel_acc, mean_acc)
+    #     logging.info(msg)
+    #     logging.info(IoU_array)
+    # elif 'test' in config.DATASET.TEST_SET:
+    #     test(config,
+    #          val_dataset,
+    #          val_loader,
+    #          model,
+    #          sv_dir=final_output_dir)
+    #
+    # end = timeit.default_timer()
+    # logger.info('Mins: %d' % np.int((end - start) / 60))
+    # logger.info('Done')
 
 
 if __name__ == '__main__':
