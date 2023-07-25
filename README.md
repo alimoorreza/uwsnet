@@ -70,12 +70,12 @@ Please change `LOG_DIR`, `OUTPUT_DIR`, `BASE_DIR`, and dataset `ROOT` according 
 ---
 
 ## Cross-validation classes for UnderWater Few-shot
-| Dataset Split     | Test class                                                |
-|-------------------|-----------------------------------------------------------|
-| Split<sup>0</sup> | Crab, Dolphin, Frog, Turtle, Whale                        |
-| Split<sup>1</sup> | Nettles, Octopus, Sea Anemone, Shrimp, Stingray           |
-| Split<sup>2</sup> | Penguin, Sea Urchin, Seal, Shark, Nudibranch              |
-| Split<sup>3</sup> | Crocodile, Otter, Polar Bear, Sea Horse, Star Fish, Squid |
+| Dataset Split     | Test class                                                | Split number in config file |
+|-------------------|-----------------------------------------------------------|-----------------------------|
+| Split<sup>1</sup> | Crab, Dolphin, Frog, Turtle, Whale                        | 0                           |
+| Split<sup>2</sup> | Nettles, Octopus, Sea Anemone, Shrimp, Stingray           | 1                           |
+| Split<sup>3</sup> | Penguin, Sea Urchin, Seal, Shark, Nudibranch              | 2                           |
+| Split<sup>4</sup> | Crocodile, Otter, Polar Bear, Sea Horse, Star Fish, Squid | 3                           |
 
 
 ## Network Options
@@ -114,13 +114,14 @@ If you want to test for a specific saved models, you can use:
 cd tools
 python3 test.py --config path_to_config_file
 ```
-#### Example (UWSNet V2)
+#### Example (UWSNet V2 for 1 shot on split 1)
 ```
 cd tools
 python3 test.py --config ../experiments_inference/eca_net_sup_que_vgg16_config/1_shot/uw_few_shot_training_config_eca_net_sup_que_vgg16_shot_1_split_0.yaml
 ```
 Set `PRETRAINED_MODEL` with the path of trained UWSNet V2. Pretrained model can be downloaded from [here](https://drive.google.com/drive/folders/1WEtRqBZgHtteCIzFHhnutp_KsXGA2Dhh?usp=drive_link).
-#### Example (UWSNet V6)
+
+#### Example (Test UWSNet V6 for 1 shot on split 1)
 ```
 cd tools
 python3 test.py --config ../experiments_inference/triplet_sup_que_vgg16_dice_config/1_shot/uw_few_shot_training_config_triplet_sup_que_vgg16_dice_shot_1_split_0.yaml

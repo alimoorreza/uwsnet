@@ -100,4 +100,4 @@ TEST:
   BATCH_SIZE_PER_GPU: 16
   FLIP_TEST: false
   MULTI_SCALE: false
-  MODEL_FILE: '/content/HRNetV2/best_new.pth'
+  MODEL_FILE: '/content/HRNetV2/best.pth'
