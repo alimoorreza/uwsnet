@@ -222,7 +222,11 @@ def main():
         dataset_len = len(images_test)
         logger.info(f'Total val files: {dataset_len}')
 
+        test_size = (config.TEST.IMAGE_SIZE[1], config.TEST.IMAGE_SIZE[0])
+
         train_dataset = UWFSDataLoader2(
+            crop_size=test_size,
+            multi_scale=False,
             output_image_height=config.TRAIN.IMAGE_SIZE[0],
             images=images_train,
             masks=masks_train,
@@ -230,6 +234,8 @@ def main():
             channel_values=None
         )
         val_dataset = UWFSDataLoader2(
+            crop_size=test_size,
+            multi_scale=False,
             output_image_height=config.TRAIN.IMAGE_SIZE[0],
             images=images_test,
             masks=masks_test,

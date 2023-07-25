@@ -492,5 +492,3 @@ def get_seg_model(cfg, **kwargs):
 
     return model
 
-
-    return model
