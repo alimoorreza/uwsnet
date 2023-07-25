@@ -224,10 +224,28 @@ def main():
 
         test_size = (config.TEST.IMAGE_SIZE[1], config.TEST.IMAGE_SIZE[0])
 
+        # train_dataset = UWFSDataLoader2(
+        #     base_size=config.TEST.BASE_SIZE,
+        #     crop_size=test_size,
+        #     multi_scale=False,
+        #     output_image_height=config.TRAIN.IMAGE_SIZE[0],
+        #     images=images_train,
+        #     masks=masks_train,
+        #     normalizer=transform.Compose(train_transform_list),
+        #     channel_values=None
+        # )
+        # val_dataset = UWFSDataLoader2(
+        #     base_size=config.TEST.BASE_SIZE,
+        #     crop_size=test_size,
+        #     multi_scale=False,
+        #     output_image_height=config.TRAIN.IMAGE_SIZE[0],
+        #     images=images_test,
+        #     masks=masks_test,
+        #     normalizer=transform.Compose(val_transform_list),
+        #     channel_values=None
+        # )
+
         train_dataset = UWFSDataLoader2(
-            base_size=config.TEST.BASE_SIZE,
-            crop_size=test_size,
-            multi_scale=False,
             output_image_height=config.TRAIN.IMAGE_SIZE[0],
             images=images_train,
             masks=masks_train,
@@ -235,9 +253,6 @@ def main():
             channel_values=None
         )
         val_dataset = UWFSDataLoader2(
-            base_size=config.TEST.BASE_SIZE,
-            crop_size=test_size,
-            multi_scale=False,
             output_image_height=config.TRAIN.IMAGE_SIZE[0],
             images=images_test,
             masks=masks_test,
