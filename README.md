@@ -193,6 +193,14 @@ Change `ROOT` (under `DATASET`), `LOG_DIR`, `OUTPUT_DIR`, `PRETRAINED` (under `M
 
 To run the training in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_hrnet_v2_train.ipynb)
 
+To test HRNet V2 model, first, specify `MODEL_FILE` (under `TEST`). Then run the following command,
+```shell
+!python3 ./uwsnet/tools/test_hrnet_v2.py \
+    --cfg ./uwsnet/experiments/hrnet/uws_training_hrnet_v2_test.yaml
+```
+
+Download the best model from [here](https://drive.google.com/drive/folders/1OQ8IHdf1wYZGoCVoDl_Y0i3rqPQvRnuu?usp=drive_link). 
+
 To run the inference in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_hrnet_v2_inference.ipynb)
 
 
@@ -224,9 +232,26 @@ Now for training run,
 cd Mask2Former-mod
 python train_net.py --num-gpus 1 --config-file ../configs/uws/semantic-segmentation/maskformer2_R50_bs16_300k.yaml
 ```
-Pretrained models are available [here](https://drive.google.com/drive/folders/1OQ8IHdf1wYZGoCVoDl_Y0i3rqPQvRnuu?usp=drive_link).
 
 To run the training in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_mask2former_train.ipynb)
+
+To test mask2former model, run the following command,
+```shell
+cd Mask2Former-mod
+python3 ./Mask2Former-mod/train_net.py --num-gpus 1 --config-file \
+    ../configs/uws/semantic-segmentation/maskformer2_R50_bs16_300k.yaml \
+    --eval-only MODEL.WEIGHTS path_to_model_file 
+```
+
+example,
+```shell
+cd Mask2Former-mod
+python3 ./Mask2Former-mod/train_net.py --num-gpus 1 --config-file \
+    ../configs/uws/semantic-segmentation/maskformer2_R50_bs16_300k.yaml \
+    --eval-only MODEL.WEIGHTS /content/Mask2Former/model_final.pth
+```
+
+Pretrained models are available [here](https://drive.google.com/drive/folders/1OQ8IHdf1wYZGoCVoDl_Y0i3rqPQvRnuu?usp=drive_link).
 
 To run the inference in colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Imran2205/uwsnet/blob/main/colab_notebooks/uw_sem_seg_mask2former_inference.ipynb)
 
