@@ -199,12 +199,14 @@ class UWFSDataLoaderVal(torch.utils.data.Dataset):
     def __getitem__(self, index):
         img, label_image_gray = self.get_image_nd_label(index)
 
+        size = img.shape
+
         if self.normalizer:
             image, label_image_gray = self.normalizer(img, label_image_gray)
         else:
             raise NotImplementedError("Normalizer not implemented...")
 
-        return image, label_image_gray
+        return image, label_image_gray, np.array(size), f'{index}.png'
 
     def __len__(self):
         return len(self.images)
