@@ -44,7 +44,7 @@ TRAIN:
   LR_MILESTONE: [10000, 20000, 30000, 40000]
   VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
   SCALE_VAL: 1
-  PRETRAINED_MODEL: '/content/drive/MyDrive/underwater_fewshot_iros23/other_models/uw_few_shot_training_config_panet_shot_1_split_0/0_split_1_nways_5_nshots_2_epoch_iou_0.716_model.pth.tar'
+  PRETRAINED_MODEL: '/content/drive/MyDrive/underwater_fewshot_iros23/other_models/uw_few_shot_training_config_panet_shot_1_split_0/0_split_1_nways_1_nshots_4_epoch_iou_0.693_model.pth.tar'
   PA_NET_TYPE: 'basic'
   RANDOM_SPLIT_TRAIN: True
   RANDOM_SPLIT_EVAL: False
