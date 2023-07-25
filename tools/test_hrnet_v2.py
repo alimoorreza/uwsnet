@@ -357,6 +357,14 @@ def main():
     else:
         raise ValueError('Only Support SGD optimizer')
 
+    if config.MODEL.PRETRAINED:
+        model_state_file = config.MODEL.PRETRAINED
+        if os.path.isfile(model_state_file):
+            checkpoint = torch.load(model_state_file, map_location={'cuda:0': 'cpu'})
+            model.module.load_state_dict(checkpoint)
+            logger.info("=> loaded pretrained model {}"
+                        .format(config.MODEL.PRETRAINED))
+
     start = timeit.default_timer()
 
     valid_loss, mean_IoU, IoU_array = validate(config,
