@@ -128,7 +128,7 @@ class UWFSDataLoaderVal(torch.utils.data.Dataset):
 
         self.base_size = base_size
         self.crop_size = crop_size
-        # self.ignore_label = ignore_label
+        # self.ignore_label = 255
 
         # self.mean = mean
         # self.std = std
