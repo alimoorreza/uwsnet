@@ -215,7 +215,7 @@ class UWFSDataLoaderVal(torch.utils.data.Dataset):
         # else:
         #     raise NotImplementedError("Normalizer not implemented...")
 
-        return image, label_image_gray, np.array(size), f'{index}.png'
+        return img.copy(), label_image_gray.copy(), np.array(size), f'{index}.png'
 
     def __len__(self):
         return len(self.images)
