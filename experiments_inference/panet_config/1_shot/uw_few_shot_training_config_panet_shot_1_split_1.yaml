@@ -1,9 +1,9 @@
 GPU: 0
-LOG_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/log/'
+LOG_DIR: '/content/log/'
 DATA_DIR: ''
-OUTPUT_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/output/'
+OUTPUT_DIR: '/content/output/'
 WORKERS: 2
-BASE_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
+BASE_DIR: '/content/uwsnet/'
 CLASSES: 2
 
 MODEL:
@@ -13,7 +13,7 @@ CUDNN:
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
-  ROOT: '/kaggle/input/under-water-few-shot/'
+  ROOT: '/content/'
   IMAGE_W: 473
   IMAGE_H: 473
 TEST:
@@ -42,9 +42,9 @@ TRAIN:
   EPISODE_TRAIN: 1000
   EPISODE_EVAL: 1000
   LR_MILESTONE: [10000, 20000, 30000, 40000]
-  VGG_MODEL_PATH: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/pretrained_backbone/vgg16-397923af.pth'
+  VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
   SCALE_VAL: 1
-  PRETRAINED_MODEL: ''
+  PRETRAINED_MODEL: '/content/drive/MyDrive/underwater_fewshot_iros23/other_models/uw_few_shot_training_config_panet_shot_1_split_1/1_split_1_nways_1_nshots_3_epoch_iou_0.601_model.pth.tar'
   PA_NET_TYPE: ''
   RANDOM_SPLIT_TRAIN: True
   RANDOM_SPLIT_EVAL: False
