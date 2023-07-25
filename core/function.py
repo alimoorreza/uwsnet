@@ -162,9 +162,9 @@ def testval(config, test_dataset, testloader, model,
                 scales=config.TEST.SCALE_LIST,
                 flip=config.TEST.FLIP_TEST)
 
-            if len(border_padding) > 0:
-                border_padding = border_padding[0]
-                pred = pred[:, :, 0:pred.size(2) - border_padding[0], 0:pred.size(3) - border_padding[1]]
+            # if len(border_padding) > 0:
+            #     border_padding = border_padding[0]
+            #     pred = pred[:, :, 0:pred.size(2) - border_padding[0], 0:pred.size(3) - border_padding[1]]
 
             if pred.size()[-2] != size[-2] or pred.size()[-1] != size[-1]:
                 pred = F.interpolate(
