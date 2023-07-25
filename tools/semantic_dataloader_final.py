@@ -171,7 +171,7 @@ class UWFSDataLoaderVal(torch.utils.data.Dataset):
         else:
             self.label_dictionary = self.channel_values
 
-        self.num_classes = len(list(self.label_dictionary.keys()))
+        self.num_classes = len(list(self.label_dictionary.keys())) - 1
 
         self.length = len(self.images)
 
