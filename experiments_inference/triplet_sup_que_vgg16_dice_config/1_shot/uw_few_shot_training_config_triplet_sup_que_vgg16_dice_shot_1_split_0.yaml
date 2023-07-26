@@ -44,7 +44,7 @@ TRAIN:
   LR_MILESTONE: [10000, 20000, 30000, 40000]
   VGG_MODEL_PATH: '/content/backbones/vgg16-397923af.pth'
   SCALE_VAL: 1
-  PRETRAINED_MODEL: '/content/fewshot_trained_model/UWSNetV6/shot_1/split_1/best_model.pth.tar'
+  PRETRAINED_MODEL: '/content/v6/0_split_1_nways_1_nshots_7_epoch_iou_0.714_model.pth.tar'
   PA_NET_TYPE: 'triplet_sup_que_vgg16_dice'
   RANDOM_SPLIT_TRAIN: True
   RANDOM_SPLIT_EVAL: False
