@@ -42,7 +42,7 @@ TRAIN:
   EPISODE_TRAIN: 1000
   EPISODE_EVAL: 1000
   SCALE_VAL: 1
-  PRETRAINED_MODEL: '/kaggle/input/uw-asnet-trained-model/1_split_1_nways_1_nshots_21_epoch_iou_0.582_model.pth.tar'
+  PRETRAINED_MODEL: '/content/drive/MyDrive/underwater_fewshot_iros23/other_models/uw_few_shot_training_config_asnet_shot_1_split_1/1_split_1_nways_1_nshots_21_epoch_iou_0.582_model.pth.tar'
   PA_NET_TYPE: ''
   RANDOM_SPLIT_TRAIN: True
   RANDOM_SPLIT_EVAL: False
