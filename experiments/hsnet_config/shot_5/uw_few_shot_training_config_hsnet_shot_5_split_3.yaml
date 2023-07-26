@@ -1,9 +1,9 @@
 GPU: 0
-LOG_DIR: '/kaggle/working/log/'
+LOG_DIR: '/content/log/'
 DATA_DIR: ''
-OUTPUT_DIR: '/kaggle/working/output/'
+OUTPUT_DIR: '/content/output/'
 WORKERS: 2
-BASE_DIR: '/kaggle/working/underwater_few_shot/'
+BASE_DIR: '/content/uwsnet/'
 CLASSES: 2
 
 MODEL:
@@ -13,7 +13,7 @@ CUDNN:
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
-  ROOT: '/kaggle/input/under-water-few-shot/dataset/'
+  ROOT: '/content/'
   IMAGE_W: 473
   IMAGE_H: 473
 TEST:
@@ -40,8 +40,7 @@ TRAIN:
   N_WAYS: 1
   N_SHOTS: 5
   EPISODE_TRAIN: 1000
-  EPISODE_EVAL:
-    1000EPISODE: 1000
+  EPISODE_EVAL: 1000
   SCALE_VAL: 1
   PRETRAINED_MODEL: '/kaggle/input/uw-asnet-trained-model/hsnet_3_split_1_nways_1_nshots_27_epoch_iou_0.632_model.pth.tar'
   PA_NET_TYPE: ''

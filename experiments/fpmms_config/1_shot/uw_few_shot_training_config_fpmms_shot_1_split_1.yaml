@@ -1,9 +1,9 @@
 GPU: 0
-LOG_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/log/'
+LOG_DIR: '/content/log/'
 DATA_DIR: ''
-OUTPUT_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/output/'
+OUTPUT_DIR: '/content/output/'
 WORKERS: 2
-BASE_DIR: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
+BASE_DIR: '/content/uwsnet/'
 CLASSES: 2
 
 MODEL:
@@ -13,7 +13,7 @@ CUDNN:
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
-  ROOT: '/nfs/jolteon/data/ssd/mdreza/underwater_few_shot/'
+  ROOT: '/content/'
   IMAGE_W: 417
   IMAGE_H: 417
 TEST:

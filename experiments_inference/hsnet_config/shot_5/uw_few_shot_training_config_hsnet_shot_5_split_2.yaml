@@ -7,43 +7,48 @@ BASE_DIR: '/content/uwsnet/'
 CLASSES: 2
 
 MODEL:
-  NAME: FPMMs
+  NAME: hsnet
 CUDNN:
   BENCHMARK: true
   DETERMINISTIC: false
   ENABLED: true
 DATASET:
   ROOT: '/content/'
-  IMAGE_W: 417
-  IMAGE_H: 417
+  IMAGE_W: 473
+  IMAGE_H: 473
 TEST:
   BATCH_SIZE_PER_GPU: 1
 TRAIN:
-  ARCH: FPMMs
-  TRAIN_H: 417
-  TRAIN_W: 417
-  BATCH_SIZE: 2
+  ARCH: hsnet
+  TRAIN_H: 473
+  TRAIN_W: 473
+  BATCH_SIZE: 1
   BATCH_SIZE_VAL: 1
   END_EPOCH: 40
   BEGIN_EPOCH: 0
   PRINT_FREQ: 100
   SAVE_FREQ: 1
-  BASE_LR: 3.5e-4
+  BASE_LR: 0.001
   MOMENTUM: 0.9
   POWER: 0.9
   WEIGHT_DECAY: 0.0005
   GAMMA: 0.1
   SAVE_PATH: default
-  RESUME:  True
+  RESUME:  False
   EVALUATE: True
-  TEST_LABEL_SPLIT_VALUE: 1
+  TEST_LABEL_SPLIT_VALUE: 2
   N_WAYS: 1
   N_SHOTS: 5
   EPISODE_TRAIN: 1000
   EPISODE_EVAL: 1000
-  LR_MILESTONE: [10000, 20000, 30000, 40000]
   SCALE_VAL: 1
-  PRETRAINED_MODEL: ''
+  PRETRAINED_MODEL: '/kaggle/input/uw-asnet-trained-model/hsnet_2_split_1_nways_1_nshots_26_epoch_iou_0.609_model.pth.tar'
+  PA_NET_TYPE: ''
   RANDOM_SPLIT_TRAIN: True
   RANDOM_SPLIT_EVAL: False
+  HSNET_BB: 'resnet50'
 
+# PA_NET_TYPE: 'eca_net_sup_que'
+# PA_NET_TYPE: 'eca_net_sup_que_vgg16'
+# PA_NET_TYPE: 'triplet_sup_que_vgg16'
+# PA_NET_TYPE: 'triplet_sup_que_vgg16_dice'
