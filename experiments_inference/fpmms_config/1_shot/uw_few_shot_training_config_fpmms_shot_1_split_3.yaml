@@ -43,7 +43,7 @@ TRAIN:
   EPISODE_EVAL: 1000
   LR_MILESTONE: [10000, 20000, 30000, 40000]
   SCALE_VAL: 1
-  PRETRAINED_MODEL: ''
+  PRETRAINED_MODEL: '/content/drive/MyDrive/underwater_fewshot_iros23/other_models/uw_few_shot_training_config_fpmms_1_shot_split_3/3_split_1_nways_1_nshots_14_epoch_iou_0.700_model.pth.tar'
   RANDOM_SPLIT_TRAIN: True
   RANDOM_SPLIT_EVAL: False
 
