@@ -279,6 +279,10 @@ The code is based on
 * [ECANet Attention](https://blog.paperspace.com/attention-mechanisms-in-computer-vision-ecanet/)
 * [Triplet Attention](https://blog.paperspace.com/triplet-attention-wacv-2021/)
 * [Dice Loss](https://github.com/pytorch/pytorch/issues/1249)
+* [HSNet](https://github.com/juhongm999/hsnet)
+* [ASNet](https://github.com/dahyun-kang/ifsl)
+* [HRNet V2](https://github.com/HRNet/HRNet-Semantic-Segmentation)
+* [Mask2Former](https://github.com/facebookresearch/Mask2Former)
 
 Thanks for their great work!
 
