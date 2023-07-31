@@ -564,9 +564,10 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                     loss = None
                     exit()
 
+                cntt += 1
+
             classIoU, meanIoU = metric.get_mIoU(labels=sorted(labels), n_run=run)
             classIoU_binary, meanIoU_binary = metric.get_mIoU_binary(n_run=run)
-            cntt += 1
 
     classIoU, classIoU_std, meanIoU, meanIoU_std = metric.get_mIoU(labels=sorted(labels))
     classIoU_binary, classIoU_std_binary, meanIoU_binary, meanIoU_std_binary = metric.get_mIoU_binary()
