@@ -494,6 +494,7 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                     # else:
                     #     pred_mask = logit_mask_agg
                     loss = 0.0
+                    print(np.array(query_pred.argmax(dim=1)[0].cpu()))
                     metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
                                   np.array(query_label[0].cpu()),
                                   labels=label_ids, n_run=run)
@@ -543,7 +544,6 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                         sup_mask
                     )
                     loss = 0.0
-                    print(np.array(pred_mask[0].cpu()))
                     metric.record(np.array(pred_mask[0].cpu()),
                                   np.array(query_label[0].cpu()),
                                   labels=label_ids, n_run=run)
