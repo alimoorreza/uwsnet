@@ -494,7 +494,16 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                     # else:
                     #     pred_mask = logit_mask_agg
                     loss = 0.0
-                    print(np.max(np.array(query_pred.argmax(dim=1)[0].cpu())))
+                    # print(np.max(np.array(query_pred.argmax(dim=1)[0].cpu())))
+                    pred_lbl = Image.fromarray(np.array(query_pred.argmax(dim=1)[0].cpu()) * 255)
+                    gt_lbl = Image.fromarray(np.array(query_label[0].cpu()) * 255)
+
+                    pred_lbl.save(f'/content/img_out/pred_{idx}.png')
+                    gt_lbl.save(f'/content/img_out/gt_{idx}.png')
+                    txt = f"{batch['sup_name']}\n{batch['que_name']}"
+                    with open(f'/content/img_out/gt_{idx}.txt', 'w') as f:
+                        f.write(txt)
+
                     metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
                                   np.array(query_label[0].cpu()),
                                   labels=label_ids, n_run=run)
