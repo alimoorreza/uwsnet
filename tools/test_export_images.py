@@ -418,6 +418,7 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
 
     with torch.no_grad():
         for run in range(1):
+            cntt = 0
             for batch, idx in tqdm(iterator, desc=f'Validation {run + 1}'):
                 # print(batch)
                 label_ids = [class2labels[batch['class'][0]]]  # [class2labels[batch['class'][0]]+1]
@@ -500,10 +501,10 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                     pred_lbl = Image.fromarray(np.array(np.array(query_pred.argmax(dim=1)[0].cpu()) * 255, dtype=np.uint8))
                     gt_lbl = Image.fromarray(np.array(np.array(query_label[0].cpu()) * 255, dtype=np.uint8))
 
-                    pred_lbl.save(f'/content/img_out/pred_{idx}.png')
-                    gt_lbl.save(f'/content/img_out/gt_{idx}.png')
+                    pred_lbl.save(f'/content/img_out/pred_{cntt}.png')
+                    gt_lbl.save(f'/content/img_out/gt_{cntt}.png')
                     txt = f"{batch['sup_name']}\n{batch['que_name']}"
-                    with open(f'/content/img_out/gt_{idx}.txt', 'w') as f:
+                    with open(f'/content/img_out/gt_{cntt}.txt', 'w') as f:
                         f.write(txt)
 
                     metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
@@ -565,6 +566,7 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
 
             classIoU, meanIoU = metric.get_mIoU(labels=sorted(labels), n_run=run)
             classIoU_binary, meanIoU_binary = metric.get_mIoU_binary(n_run=run)
+            cntt += 1
 
     classIoU, classIoU_std, meanIoU, meanIoU_std = metric.get_mIoU(labels=sorted(labels))
     classIoU_binary, classIoU_std_binary, meanIoU_binary, meanIoU_std_binary = metric.get_mIoU_binary()
