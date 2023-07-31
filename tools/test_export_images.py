@@ -501,10 +501,10 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                     pred_lbl = Image.fromarray(np.array(np.array(query_pred.argmax(dim=1)[0].cpu()) * 255, dtype=np.uint8))
                     gt_lbl = Image.fromarray(np.array(np.array(query_label[0].cpu()) * 255, dtype=np.uint8))
 
-                    pred_lbl.save(f'/content/img_out/pred_{cntt}.png')
-                    gt_lbl.save(f'/content/img_out/gt_{cntt}.png')
+                    pred_lbl.save(f'/content/img_out/pred/{cntt}.png')
+                    gt_lbl.save(f'/content/img_out/gt/{cntt}.png')
                     txt = f"{batch['sup_name']}\n{batch['que_name']}"
-                    with open(f'/content/img_out/gt_{cntt}.txt', 'w') as f:
+                    with open(f'/content/img_out/txt/{cntt}.txt', 'w') as f:
                         f.write(txt)
 
                     metric.record(np.array(query_pred.argmax(dim=1)[0].cpu()),
