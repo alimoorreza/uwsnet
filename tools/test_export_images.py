@@ -419,7 +419,7 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
     with torch.no_grad():
         for run in range(1):
             for batch, idx in tqdm(iterator, desc=f'Validation {run + 1}'):
-                print(batch)
+                # print(batch)
                 label_ids = [class2labels[batch['class'][0]]]  # [class2labels[batch['class'][0]]+1]
                 support_images = [batch["support_image"]]
                 support_fg_mask = [batch["support_fg_mask"]]
@@ -543,6 +543,7 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                         sup_mask
                     )
                     loss = 0.0
+                    print(np.array(pred_mask[0].cpu()))
                     metric.record(np.array(pred_mask[0].cpu()),
                                   np.array(query_label[0].cpu()),
                                   labels=label_ids, n_run=run)
