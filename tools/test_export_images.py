@@ -495,6 +495,8 @@ def test(model, iterator, class2labels, labels_split, test_label_split_value, cr
                     #     pred_mask = logit_mask_agg
                     loss = 0.0
                     # print(np.max(np.array(query_pred.argmax(dim=1)[0].cpu())))
+                    print(np.array(query_pred.argmax(dim=1)[0].cpu()).shape,
+                          np.array(query_label[0].cpu()).shape)
                     pred_lbl = Image.fromarray(np.array(query_pred.argmax(dim=1)[0].cpu()) * 255)
                     gt_lbl = Image.fromarray(np.array(query_label[0].cpu()) * 255)
 
