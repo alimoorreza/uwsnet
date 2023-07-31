@@ -4,7 +4,7 @@ Imagery" (accepted to IROS2023) [[arxiv]()]
 
 Our proposed network architecture for few-shot segmentation
 <p align="left">
-  <img src="figures/architecture2.png" width="100%" height="auto">
+  <img src="figures/architecture_2.png" width="100%" height="auto">
 </p>
 
 ---
