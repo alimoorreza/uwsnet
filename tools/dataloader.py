@@ -91,6 +91,7 @@ class IUDataset(torch.utils.data.Dataset):
         query_mask,_ = self.__getmask(query_["mask_array"],query_["class"][0])
 
         support_image,support_fg,support_bg = [],[],[]
+
         for support in support_name:
             support_ = loadmat(support)
             # loadmat(self.directory+f"dataset/{class_}/{support}")
@@ -122,6 +123,8 @@ class IUDataset(torch.utils.data.Dataset):
         sample['query_image'] = [query_image]
         sample["query_label"] = [query_mask]
         sample["class"] = class_
+        sample["sup_name"] = support_images
+        sample["que_name"] = query_images
         if self.transform is not None:
             sample = self.transform(sample)
 
